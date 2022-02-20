@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+
+<div th:fragment="deleteOrder">
+
+    <div class="d-flex justify-content-center row">
+       	<div class="col-md-20">
+            <div class="rounded">
+       			<div class="table-responsive table-borderless">
+        	<!-- Original Table Content -->
+					<table id="table_id" class="display" style="width:100%" >
+						<thead style="background: #dddcdc">
+							<tr>
+								<th class="text-center">
+									<div class="toggle-btn">
+										<div class="inner-circle"></div>
+									</div>
+								</th>
+								<th style="text-align:center; color:black;">Order ID</th>
+								<th style="text-align:center; color:black;">Company Name</th>
+								<th style="text-align:center; color:black;">Customer Name</th>
+								<th style="text-align:center; color:black;">Delivery Date</th>
+								<th style="text-align:center; color:black;">Delivery Price</th>											
+								<th style="text-align:center; color:black;">Delivery Status</th>
+								<th style="text-align:center; color:black;">Payment</th>
+								<th style="text-align:center; color:black;">Delete</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody class="table-body">
+							<!-- <tr class="cell-1" th:if="${products.empty}">
+								<td style="text-align:center" colspan="4">No Orders Available</td>
+							</tr> -->
+							<tr class="cell-1"  th:each="product:${products}">
+								<td class="text-center">
+									<div class="toggle-btn">
+										<div class="inner-circle"></div>
+									</div>
+								</td>
+								<td style="text-align:center"><h5 th:text="${product.orderId}">000001</h5></td>
+								<td style="text-align:center"><h5 th:text="${product.companyName}">Nike</h5></td>
+								<td style="text-align:center"><h5 th:text="${product.customerName}">Warren Peterson</h5></td>											
+								<td style="text-align:center"><h5 th:text="${product.deliveryDate}">11/15/2020</h5></td>
+								<td style="text-align:center"><h5 th:text="${product.deliveryPrice}">200</h5></td>											
+								<td style="text-align:center"><span class="badge" style="color:black" th:text="${product.deliveryStatus}">Shipped</span></td>
+								<td style="text-align:center"><h5 th:text="${product.payment}">PayPal</h5></td>
+								<td style="text-align:center"><a class="btn btn-link"onmouseover="this.style.backgroundColor='#006db9'" onmouseout="this.style.backgroundColor=''" 
+									style=" color:black"  th:href="@{/productClone/removeOrder/} + ${product.orderId}">Delete <i class="fa fa-remove"
+									onmouseover="this.style.color='green'; this.style.backgroundColor='white'"  
+									onmouseout="this.style.color='red'; this.style.backgroundColor='white'" style="color:red"> </i></a></td>
+							</tr>
+						</tbody>
+					</table>
+		<!-- Original Table Content -->
+				</div>
+   			</div>
+        </div>
+   	</div>
+
+</div>

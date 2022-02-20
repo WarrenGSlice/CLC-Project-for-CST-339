@@ -1,0 +1,177 @@
+<!-- CST-339 CLC Milestone Project
+	Order Management Application
+	Created by Warren Peterson,
+	Jonathan Levan, Ivan Gudino -->
+
+<!-- Products Page -->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:layout="https://ultraq.net.nz/thymeleaf/layout">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>User Settings</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <script type="text/javascript"
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/css/style2.css">
+
+
+
+        <script>
+
+            $(document).ready(function ()
+            {
+
+                $('.toggle-btn').click(function ()
+                {
+                    $(this).toggleClass('active').siblings().removeClass('active');
+                });
+
+            });
+
+
+        </script>
+        <style>
+            @import url('https://fonts.googleapis.com/css?family=Assistant');
+        </style>
+    </head>
+
+    <body style="background: #0D1829">
+
+        <!-- This is the SideBar -->
+        <div class="wrapper d-flex align-items-stretch">
+            <nav id="sidebar">
+                <div class="custom-menu">
+                    <button type="button" id="sidebarCollapse" class="btn btn-primary"></button>
+                </div>
+                <div class="img bg-wrap text-center py-4" style="background-image: url(/images/bg_1.jpg);">
+                    <div class="user-logo">
+                        <div class="img" style="background-image: url(/images/logo.jpg);"></div>
+                        <h3 th:text="${login.username}"></h3>
+                    </div>
+                </div>
+                <ul class="list-unstyled components mb-5">
+                    <li class="active">
+                        <a href="/"><span class="fa fa-home mr-3"></span> Home</a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="fa fa-download mr-3 notif"><small
+                                    class="d-flex align-items-center justify-content-center">5</small></span> Download
+                            Order File</a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="fa fa-info-circle mr-3"></span> About</a>
+                    </li>
+                    <li>
+                        <a href="/login/"><span class="fa fa-sign-in mr-3"></span> Dashboard Login</a>
+                    </li>
+                    <li>
+                        <a href="/userSettings/"><span class="fa fa-edit mr-3"></span> User Settings</a>
+                    </li>
+                    <li>
+                        <a href="/register/"><span class="fa fa-id-card-o mr-3"></span> Register</a>
+                    </li>
+                    <li>
+                        <a href="/login/signout"><span class="fa fa-sign-out mr-3"></span> Sign Out</a>
+                    </li>
+                </ul>
+
+            </nav>
+
+            <!-- Page Content  -->
+            <div id="content" layout:fragment="content" class="p-4 p-md-5 pt-5">
+                <form action="#" th:action="@{changeSettings}" th:object="${user}" method="post">
+                    <div class="input-group">
+                        <input type="text" class="w3-hover-shadow w3-border w3-hover-border-red" th:name="${firstName}"
+                            th:field="*{firstName}" th:value="${firstName}" placeholder="Enter First Name">
+                    </div>
+
+                    <p style="color:red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First Name
+                        Error</p>
+
+                    <div class="input-group">
+                        <input type="text" class="w3-hover-shadow w3-border w3-hover-border-red" th:name="${lastName}"
+                            th:field="*{lastName}" th:value="${lastName}" placeholder="Enter Last Name">
+                    </div>
+
+                    <p style="color:red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last Name
+                        Error</p>
+
+                    <div class="input-group">
+                        <input type="email" class="w3-hover-shadow w3-border w3-hover-border-red" th:name="${email}"
+                            th:field="*{email}" th:value="${email}" placeholder="Enter Email Address">
+                    </div>
+
+                    <p style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Address Error
+                    </p>
+
+                    <div class="input-group">
+                        <input type="text" class="w3-hover-shadow w3-border w3-hover-border-red" th:value="${phone}"
+                            th:name="${phone}" th:field="*{phone}" placeholder="Enter Phone Number">
+                    </div>
+
+                    <p style="color:red" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Phone Number Error
+                    </p>
+
+                    <div class="input-group">
+                        <input type="text" class="w3-hover-shadow w3-border w3-hover-border-red" th:value="${businessName}"
+                            th:name="${businessName}" th:field="*{businessName}" placeholder="Enter Business Name">
+                    </div>
+
+                    <p style="color:red" th:if="${#fields.hasErrors('businessName')}" th:errors="*{businessName}">Business Name Error</p>
+
+                    <div class="input-group">
+                        <input type="text" class="w3-hover-shadow w3-border w3-hover-border-red" th:value="${address}"
+                            th:name="${address}" th:field="*{address}" placeholder="Enter Adress">
+                    </div>
+
+                    <p style="color:red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Adress Error</p>
+
+                    <div class="input-group">
+                        <input type="text" class="w3-hover-shadow w3-border w3-hover-border-red" th:value="${city}"
+                            th:name="${city}" th:field="*{city}" placeholder="Enter City">
+                    </div>
+
+                    <p style="color:red" th:if="${#fields.hasErrors('city')}" th:errors="*{city}">City Error</p>
+
+                    <div class="input-group">
+                        <input type="text" class="w3-hover-shadow w3-border w3-hover-border-red" th:value="${state}"
+                            th:name="${state}" th:field="*{state}" placeholder="Enter State">
+                    </div>
+
+                    <p style="color:red" th:if="${#fields.hasErrors('state')}" th:errors="*{state}">State Error</p>
+
+                    
+                    <div class="input-group">
+                        <input type="text" class="w3-hover-shadow w3-border w3-hover-border-red" th:value="${zip}"
+                            th:name="${zip}" th:field="*{zip}" placeholder="Enter Zip Code">
+                    </div>
+
+                    <p style="color:red" th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}">Zip Code Error</p>
+
+                    <button type="submit" id="saveSettings" class="btn btn-success">Save Settings</button>
+                </form>
+                <br><br>
+                <a href="/userSettings/doPassChange">Change Password</a>
+            </div>
+
+        </div>
+
+        <script src="js/jquery.min.js"></script>
+        <script src="js/popper.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/main.js"></script>
+        <!-- SideBar End -->
+
+
+    </body>
+
+</html>

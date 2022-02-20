@@ -1,0 +1,162 @@
+<!-- CST-339 CLC Milestone Project
+	Order Management Application
+	Created by Warren Peterson,
+	Jonathan Levan, Ivan Gudino -->
+	
+<!-- Registration Page -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" >
+<!-- Head Section Insert -->
+	<head th:replace="layouts/head-section :: head-section">
+	<title>Login Form</title>
+	</head>
+	
+<body>
+
+<!-- Navbar link -->
+	<div th:replace="layouts/navbar :: navbar"></div>
+	
+<!-- main -->
+<!-- Main Page Content -->
+	<div class="signupform">
+	<div class="container">
+		<!-- main content -->
+		<div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+		<div class="agile_info">
+			<div class="w3l_form">
+				<div class="left_grid_info">
+					<h1>Register For Your Business Account</h1>
+					<p>Thank you for trying our order management solution</p>
+					<img th:src="@{/images/image.jpg}" alt="" />
+				</div>
+			</div>
+			<div class="w3_info">
+				<h2>Register your Account</h2>
+				<p>Enter your details to register.</p>
+						<form action="#" th:action="@{doRegister}" th:object="${user}" method="post" >
+							<label>User Name</label>
+							<div class="input-group" >
+								<span class="fa fa-user w3-hover-red" aria-hidden="true"></span>
+								<input type="text" class="form-control w3-hover-shadow w3-border w3-hover-border-red" 
+								th:text=${username} th:value="${username}" th:name="${username}" th:field="*{username}" placeholder="Enter User Name" > 
+							</div>
+							
+							<p style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">User Name Error
+							
+							<div class="input-group">
+								<span class="fa fa-user w3-hover-red" aria-hidden="true"></span>
+								<input type="text"  class="w3-hover-shadow w3-border w3-hover-border-red"  
+								th:name="${firstName}" th:field="*{firstName}" th:value="${firstName}" placeholder="Enter First Name" > 
+							</div>
+							
+							<p style="color:red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First Name Error
+							
+							<div class="input-group">
+								<span class="fa fa-user w3-hover-red" aria-hidden="true"></span>
+								<input type="text" class="w3-hover-shadow w3-border w3-hover-border-red" 
+								 th:name="${lastName}" th:field="*{lastName}" th:value="${lastName}" placeholder="Enter Last Name" > 
+							</div>
+							
+							<p style="color:red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last Name Error
+							
+							<div class="input-group">
+								<span class="fa fa-user w3-hover-red" aria-hidden="true"></span>
+								<input type="text" class="w3-hover-shadow w3-border w3-hover-border-red"
+									th:name="${address}" th:field="*{address}" th:value="${address}"
+									placeholder="Enter Address">
+							</div>
+
+							<p style="color:red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Address Error</p>
+							
+							<div class="input-group">
+								<span class="fa fa-user w3-hover-red" aria-hidden="true"></span>
+								<input type="text" class="w3-hover-shadow w3-border w3-hover-border-red"
+									th:name="${city}" th:field="*{city}" th:value="${city}" placeholder="Enter City">
+							</div>
+
+							<p style="color:red" th:if="${#fields.hasErrors('city')}" th:errors="*{city}">City Error</p>
+
+							<div class="input-group">
+								<span class="fa fa-user w3-hover-red" aria-hidden="true"></span>
+								<input type="text" class="w3-hover-shadow w3-border w3-hover-border-red"
+									th:name="${state}" th:field="*{state}" th:value="${state}"
+									placeholder="Enter State">
+							</div>
+
+							<p style="color:red" th:if="${#fields.hasErrors('state')}" th:errors="*{state}">State Error
+							</p>
+
+							<div class="input-group">
+								<span class="fa fa-user w3-hover-red" aria-hidden="true"></span>
+								<input type="text" class="w3-hover-shadow w3-border w3-hover-border-red"
+									th:name="${zip}" th:field="*{zip}" th:value="${zip}" placeholder="Enter Zip">
+							</div>
+
+							<p style="color:red" th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}">Zip Error</p>
+							
+							<div class="input-group">
+								<span class="fa fa-envelope w3-hover-red" aria-hidden="true"></span>
+								<input type="email"  class="w3-hover-shadow w3-border w3-hover-border-red"  
+								th:name="${email}" th:field="*{email}" th:value="${email}" placeholder="Enter Email Address" > 
+							</div>
+							
+							<p style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Address Error
+							
+							<div class="input-group">
+								<span class="fa fa-lock w3-hover-red" aria-hidden="true"></span>
+								<input type="password" class="w3-hover-shadow w3-border w3-hover-border-red"  th:name="${password}" 
+								th:field="*{password}" th:value="${password}" placeholder="Enter Password" >
+							</div>
+							
+							<p style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error
+							
+							<!-- <div class="input-group">
+								<span class="fa fa-lock w3-hover-red" aria-hidden="true"></span>
+								<input type="password" class="w3-hover-shadow w3-border w3-hover-border-red"  th:name="${password}" 
+								th:field="*{password}" th:value="${password}" placeholder="Confirm Password" > 
+							</div>
+							
+							<p style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error -->
+							
+							<div class="input-group">
+								<span class="fa fa-user w3-hover-red" aria-hidden="true"></span>
+								<input type="text" class="w3-hover-shadow w3-border w3-hover-border-red"
+									th:name="${businessName}" th:field="*{businessName}" th:value="${businessName}"
+									placeholder="Enter Business Name">
+							</div>
+
+							<p style="color:red" th:if="${#fields.hasErrors('businessName')}" th:errors="*{businessName}">
+								Business Name Error</p>
+							
+							<div class="input-group">
+								<span class="fa fa-phone w3-hover-red" aria-hidden="true"></span>
+								<input type="text" class="w3-hover-shadow w3-border w3-hover-border-red" 
+								th:value="${phone}" th:name="${phone}" th:field="*{phone}" placeholder="Enter Phone Number" > 
+							</div>
+							
+							<p style="color:red" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Phone Number Error
+							
+							
+							
+							<div class="login-check">
+						 <label class="checkbox  w3-hover-red"><input type="checkbox" name="checkbox" checked=""><i> </i><a href="#">Remember Me</a></label>
+					</div>						
+						<button class="btn btn-danger btn-block w3-hover-green" type="submit" >Register</button >      
+						<button class="btn btn-danger btn-block w3-hover-white" style="position:relative; left:200px" type="reset" name="clearFields">Reset</button>     
+				</form>
+				<p class="account">By clicking register, you agree to our <a href="#">Terms & Conditions!</a></p>
+				<p class="account1">Already a member? <a href="../login/">Sign In</a></p>
+				</div>
+		</div>
+		<!-- //main content -->
+	</div>
+	<!-- footer -->
+	<div class="footer">
+		<p>&copy; 2019 Business login form. All Rights Reserved | Design by <a href="https://w3layouts.com/" target="blank">Ivan, Jonathan & Warren</a></p>
+	</div>
+	<!-- footer -->
+	<div th:replace="layouts/footer :: footer"></div>
+	</div>
+	</body>
+</html>
+	

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<script>
+function ConfirmAdd() {
+    return confirm('Are you sure you want to create this order?');
+};
+</script>
+
+	<div th:fragment="addOrder">
+		
+		<div class="tab-content">
+        	<div id="itemDetailsTab" class="container-fluid tab-pane active">
+
+        		<br>
+        		<form th:action="@{/productClone/addOrder}" th:object="${orderEntity}" method="post">
+        			<div class="form-row">
+        				<!-- <div class="form-group col-md-3" style="display:inline-block">
+        					<label for="itemDetailsOrderNumber">Order Number<span class="requiredIcon">*</span></label>
+        					<input type="text" th:value="${orderId}" th:field="*{orderId}" class="form-control" name="orderId" id="orderId" autocomplete="off">
+        					<div class="customListDivWidth" id="itemDetailsOrderIdSuggestionDiv"></div>
+        				</div> -->
+        				<div class="form-group col-md-4" style="display:inline-block">
+        					<label for="itemDetailsOrder">Company Name</label>
+        					<input type="text"  th:value="${companyName}" th:field="*{companyName}" class="form-control" name="companyName" id="companyName" autocomplete="off" >
+        					<div class="customListDivWidth" id="itemDetailsOrderSuggestionDiv"></div>
+        				</div>
+        				<div class="form-group col-md-4" style="display:inline-block">
+        					<label for="itemDetailsCustomer">Customer Name</label>
+        					<input type="text"  th:value="${customerName}" th:field="*{customerName}" class="form-control" name="customerName" id="customerName" autocomplete="off">
+        					<div class="customListDivWidth" id="itemDetailsCustomerSuggestionDiv"></div>
+        				</div>      			
+        				
+        				<div class="form-group col-md-4" style="display:inline-block">
+        					<label for="itemDetailsDeliveryDate">Delivery Date</label>
+        					<input type="date" class="form-control" th:value="${deliveryDate}" th:field="*{deliveryDate}" name="deliveryDate" id="deliveryDate" autocomplete="off">
+        				</div>
+        			</div>
+        			<div class="form-row">
+        				<div class="form-group col-md-4">
+        					<label for="itemDetailsDeliveryPrice">Delivery Price</label>
+        					<input type="text" class="form-control" name="deliveryPrice" th:value="${deliveryPrice}" th:field="*{deliveryPrice}" id="deliveryPrice" autocomplete="off">
+
+        				</div>
+        				
+        				<div class="form-group col-md-4">
+        					<label for="itemDetailsDeliveryStatus">Delivery Status</label>
+        					<input type="text" class="form-control" name="deliveryStatus" id="deliveryStatus" th:value="${deliveryStatus}" th:field="*{deliveryStatus}"  autocomplete="off">
+
+        				</div>
+        				<div class="form-group col-md-4">
+        					<label for="itemDetailsPayment">Payment Type</label>
+        					<input type="text" class="form-control" name="payment"  th:value="${payment}" th:field="*{payment}" id="payment" autocomplete="off">
+
+        				</div>
+        				<div class="form-group col-md-3">
+							<div id="imageContainer"></div>
+						</div>
+        			</div>
+
+						<input type="submit" onclick='return ConfirmAdd()' value="Add Order" class="btn btn-success">			
+        		<!--  	<button onclick="window.location.href='/productClone/'" type="button" id="addItem" class="btn btn-success" >Add Item</button> -->
+
+        		</form>
+        		
+       		</div>
+        		
+        </div>
+	
+	</div>

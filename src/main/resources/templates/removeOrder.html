@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:layout="https://ultraq.net.nz/thymeleaf/layout">
+
+<script>
+function ConfirmDelete() {
+    return confirm('Are you sure you want to delete?');
+};
+</script>
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>Delete Order Form</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <script type="text/javascript"
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/css/style2.css">
+
+
+
+        <script>
+
+            $(document).ready(function ()
+            {
+
+                $('.toggle-btn').click(function ()
+                {
+                    $(this).toggleClass('active').siblings().removeClass('active');
+                });
+
+            });
+
+
+        </script>
+        <style>
+            @import url('https://fonts.googleapis.com/css?family=Assistant');
+        </style>
+    </head>
+
+    <body style="background: #0D1829">
+
+        <!-- This is the SideBar -->
+        <div class="wrapper d-flex align-items-stretch">
+            <nav id="sidebar">
+                <div class="custom-menu">
+                    <button type="button" id="sidebarCollapse" class="btn btn-primary"></button>
+                </div>
+                <div class="img bg-wrap text-center py-4" style="background-image: url(/images/bg_1.jpg);">
+                    <div class="user-logo">
+                        <div class="img" style="background-image: url(/images/logo.jpg);"></div>
+                        <h3 th:text="${login.username}"></h3>
+                    </div>
+                </div>
+                <ul class="list-unstyled components mb-5">
+                    <li class="active">
+                        <a href="/"><span class="fa fa-home mr-3"></span> Home</a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="fa fa-download mr-3 notif"><small
+                                    class="d-flex align-items-center justify-content-center">5</small></span> Download
+                            Order File</a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="fa fa-info-circle mr-3"></span> About</a>
+                    </li>
+                    <li>
+                        <a href="/login/"><span class="fa fa-sign-in mr-3"></span> Dashboard Login</a>
+                    </li>
+                    <li>
+                        <a href="/userSettings/"><span class="fa fa-edit mr-3"></span> User Settings</a>
+                    </li>
+                    <li>
+                        <a href="/register/"><span class="fa fa-id-card-o mr-3"></span> Register</a>
+                    </li>
+                    <li>
+                        <a href="/login/signout"><span class="fa fa-sign-out mr-3"></span> Sign Out</a>
+                    </li>
+                </ul>
+
+            </nav>
+
+
+
+            <!-- Page Content  -->
+            <div class="tab-content">
+        		<div id="itemDetailsTab" class="container-fluid tab-pane active">
+
+        			<br>
+        			<form th:action="@{/productClone/removeOrder}" th:object="${orderEntity}" method="post">
+        				<div class="form-row">
+        					<div class="form-group col-md-3" style="display:inline-block">
+        						<label for="itemDetailsOrderNumber">Order Number<span class="requiredIcon">*</span></label>
+        						<input type="text" th:value="${orderId}" th:field="*{orderId}" class="form-control" th:name="${orderId}" id="orderId" autocomplete="off">
+        						<div class="customListDivWidth" id="itemDetailsOrderIdSuggestionDiv"></div>
+        					</div>
+        					<div class="form-group col-md-3" style="display:inline-block">
+        						<label for="itemDetailsOrder">Company Name</label>
+	        					<input type="text"  th:value="${companyName}" th:field="*{companyName}" class="form-control" th:name="${companyName}" id="companyName" autocomplete="off" >
+    	    					<div class="customListDivWidth" id="itemDetailsOrderSuggestionDiv"></div>
+        					</div>
+        					<div class="form-group col-md-3" style="display:inline-block">
+        						<label for="itemDetailsCustomer">Customer Name</label>
+        						<input type="text"  th:value="${customerName}" th:field="*{customerName}" class="form-control" th:name="${customerName}" id="customerName" autocomplete="off">
+        						<div class="customListDivWidth" id="itemDetailsCustomerSuggestionDiv"></div>
+        					</div>      			
+        				
+	        				<div class="form-group col-md-3" style="display:inline-block">
+    	    					<label for="itemDetailsDeliveryDate">Delivery Date</label>
+        						<input type="date" class="form-control" th:value="${deliveryDate}" th:field="*{deliveryDate}" th:name="${deliveryDate}" id="deliveryDate" autocomplete="off">
+        					</div>
+        				</div>
+        				<div class="form-row">
+        					<div class="form-group col-md-4">
+        						<label for="itemDetailsDeliveryPrice">Delivery Price</label>
+	        					<input type="text" class="form-control" th:name="${deliveryPrice}" th:value="${deliveryPrice}" th:field="*{deliveryPrice}" id="deliveryPrice" autocomplete="off">
+
+    	    				</div>
+        				
+        					<div class="form-group col-md-4">
+        						<label for="itemDetailsDeliveryStatus">Delivery Status</label>
+        						<input type="text" class="form-control" th:name="${deliveryStatus}" id="deliveryStatus" th:value="${deliveryStatus}" th:field="*{deliveryStatus}"  autocomplete="off">
+
+        					</div>
+        					<div class="form-group col-md-4">
+        						<label for="itemDetailsPayment">Payment Type</label>
+	        					<input type="text" class="form-control" th:name="${payment}"  th:value="${payment}" th:field="*{payment}" id="payment" autocomplete="off">
+
+    	    				</div>
+        					<div class="form-group col-md-3">
+								<div id="imageContainer"></div>
+							</div>
+        				</div>
+
+						<input type="submit" onclick='return ConfirmDelete()'value="Delete Order" class="btn btn-success"></input>			
+        		<!--  	<button onclick="window.location.href='/productClone/'" type="button" id="addItem" class="btn btn-success" >Add Item</button> -->
+
+        			</form>
+        		
+       			</div>
+        		
+        	</div>
+
+        </div>
+
+        <script src="js/jquery.min.js"></script>
+        <script src="js/popper.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/main.js"></script>
+        <!-- SideBar End -->
+
+
+    </body>
+
+</html>

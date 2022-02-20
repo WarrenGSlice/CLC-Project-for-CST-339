@@ -1,0 +1,72 @@
+<!-- CST-339 CLC Milestone Project
+	Order Management Application
+	Created by Warren Peterson,
+	Jonathan Levan, Ivan Gudino -->
+
+<!-- Login Page -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" >
+<!-- Head Section Insert -->
+	<head th:replace="layouts/head-section :: head-section">
+	<title>Login Form</title>
+	</head>
+	
+	<body>
+	
+	<!-- Navbar link -->
+	<div th:replace="layouts/navbar :: navbar"></div>
+	
+	<!-- Main Page Content -->
+	<div class="signupform">
+	<div class="container">
+		<!-- main content -->
+		<div class="alert alert-primary" role="alert" th:text="${success}" th:if="${success}"></div>
+		<div class="agile_info">
+			<div class="w3l_form">
+				<div class="left_grid_info">
+					<h1>Manage Your Business Account</h1>
+					<p>Thank you for using our order management solution</p>
+					<img th:src="@{/images/image.jpg}" alt="" />
+				</div>
+			</div>
+			<div class="w3_info">
+				<h2>Login to your Account</h2>
+				<p>Enter your details to login.</p>
+				
+				<form action="#" th:action="@{doLogin}" th:object="${login}" method="post">
+					<label style="color:white">User Name</label>
+					<div class="input-group">
+						<span class="fa fa-envelope" aria-hidden="true"></span>
+						<input  type="text"  class="form-control w3-hover-shadow w3-border w3-hover-border-red" 
+						th:field="*{username}" th:value="${username}" th:text="${username}" placeholder="Enter User Name" th:name="${username}" required> 
+					</div>
+					<p style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">User Name Error
+					
+					<label style="color:white">Password</label>
+					<div class="input-group">
+						<span class="fa fa-lock" aria-hidden="true"></span>
+						<input type="password" th:field="*{password}" th:value="${password}"class="w3-hover-shadow w3-border w3-hover-border-red" placeholder="Enter Password" required>
+					</div> 
+					<p style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error
+					<div class="login-check">
+						 <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i> Remember me</label>
+					</div>						
+						<button class="btn btn-danger btn-block w3-hover-green" type="submit">Login</button >    
+				</form>
+				<p class="account">By clicking login, you agree to our <a href="#">Terms & Conditions!</a></p>
+				<p class="account1">Dont have an account? <a href="/register/">Register here</a></p>
+			</div>
+		</div>
+		<!-- //main content -->
+	</div>
+	<!-- footer -->
+	<div class="footer">
+		<p>&copy; 2019 Business login form. All Rights Reserved | Design by <a href="https://w3layouts.com/" target="blank">Ivan, Jonathan & Warren</a></p>
+	</div>
+	<!-- footer -->
+	<div th:replace="layouts/footer :: footer"></div>
+</div>
+</body>
+</html>	
+
+

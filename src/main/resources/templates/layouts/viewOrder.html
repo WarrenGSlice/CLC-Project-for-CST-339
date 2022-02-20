@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!-- These are the Table Tabs -->
+        	<div th:fragment="viewOrder">
+        		<div style=" margin:0; font-family:Arial; font-weight:bold;">
+        			<div class="tablink" style="background-color: #555; color:red; float:left; border:none; outline:none; cursor:pointer; padding:14px 16px; font-size: 17px; width:100%; ">
+        			<button class="tablink" onclick="openPage('View Orders', this, 'green')" id="defaultOpen">View Orders</button>
+					<button class="tablink" onclick="openPage('Update Orders', this, 'green')" >Update Orders</button>
+					<button class="tablink" onclick="openPage('Delete Orders', this, 'blue')">Delete Orders</button>
+					<button class="tablink" onclick="openPage('Add Orders', this, 'orange')">Add Orders</button>
+					</div>
+					<div id="View Orders" class="tabcontent">
+  						<h3 style="color:white; font-weight:bold; text-align: center;">These are all of the Orders in the System:</h3>
+  						<!-- Data Table Section -->
+        				<div th:replace="layouts/productTable :: productTable"></div>
+        	
+					</div>
+
+					<div id="Update Orders" class="tabcontent">
+  						<h3 style="color:white; font-weight:bold; text-align: center;">Choose an Order to Update:</h3>
+						<div th:replace="updateOrder :: updateOrder"></div>
+					</div>
+
+					<div id="Delete Orders" class="tabcontent">
+  						<h3 style="color:white; font-weight:bold; text-align: center;">Choose an Order to Delete:</h3>
+						<div th:replace="deleteOrder :: deleteOrder"></div>
+					</div>
+
+					<div id="Add Orders" class="tabcontent">
+  						<h3 style="color:white; font-weight:bold; text-align: center;">Enter in the New order you would like to add</h3>
+  						<p style="color:white; align-content:center;">*Order Id is automatically generated</p>
+  						<div th:replace="addOrder :: addOrder"></div>
+					</div>
+        		</div>
+        	</div>
