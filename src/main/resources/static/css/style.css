@@ -534,8 +534,8 @@ h5 {
 		margin: 0em 0em .5em 0em;
 	}
 	.vidvid{
-		width: 105%;
-		right:2%;
+		width: 110%;
+		right:-3%;
 	}
 }
 @media screen and (max-width: 414px){
@@ -559,8 +559,8 @@ h5 {
 		font-size: 14px;
 	}
 	.vidvid{
-		width: 105%;
-		right:2%;
+		width: 107%;
+		right:-2%;
 	}
 }
 @media screen and (max-width: 384px){
