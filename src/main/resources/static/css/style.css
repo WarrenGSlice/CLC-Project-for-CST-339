@@ -326,7 +326,7 @@ h5 {
     color: #fff;
 }
 /** Responsive **/
-@media screen and (max-width: 3850px){
+@media screen and (max-width: 3850px) and(min-width: 2640px){
 	.w3-display-container{
 		margin-top:0%;
 		height:100%;
