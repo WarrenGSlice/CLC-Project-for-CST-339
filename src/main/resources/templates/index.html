@@ -12,6 +12,7 @@
 <link rel="stylesheet" type="text/css" href="/css/homepage.css">
 <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+<link rel="stylesheet" href="/css/style.css">
 <body>
 
 <!-- Navbar (sit on top) -->
@@ -29,7 +30,7 @@
   	<!-- <div class="sketchfab-embed-wrapper"> 
   	<iframe style="position:relative; right:15px" width="715" height="715" title="SEND NUDES" 
   	src="https://sketchfab.com/models/6c008f3a3bd1426e8f80446128e12ce2/embed?autostart=1&ui_hint=0&ui_theme=dark"> </iframe> </div> -->
-	<video class="vidvid"  height="auto"  style=" position:relative; " autoplay muted>
+	<video class="vidvid"   style=" position:relative" autoplay muted>
 	
 	<source src="https://i.imgur.com/OGgTtv0.mp4" type="video/mp4"/>
 	</video>
@@ -41,33 +42,33 @@
 <!-- Container (About Section) -->
 <div class="w3-content w3-container w3-padding-64 " id="about">
   <h3 class="w3-center"style="background:black; color:white; font:bold; font-size:36px" >ABOUT OUR SOLUTION</h3>
-  <p class="w3-center" style="color:black; font:bold"><em>We love helping companies with their orders</em></p>
+  <p class="w3-center" style="color:black; font-weight:bold"><em>We love helping companies with their orders</em></p>
   <p style="color:black">We have created a one stop solution that provides everything you need to manage today's eCommerce orders. If you have a company and are looking for the perfect
   	way to manage your orders, we can help! Our solution allows you to input all of the customer orders and easily manage them. You can search through the products, the orders
   	and quickly process those order in an efficient way. Try out our order management solution today.</p>
   <div class="w3-row">
     <div class="w3-col m6 w3-center w3-padding-large">
-      <p><b><i class="fa fa-user w3-margin-right"></i>CEO Warren Peterson</b></p><br>
+      <p style="color:black; font-weight:bold"><b><i class="fa fa-user w3-margin-right"></i>CEO Warren Peterson</b></p><br>
       <img src="https://scontent.fhio2-2.fna.fbcdn.net/v/t31.18172-8/21125545_10155061507233668_1883906338078193273_o.jpg?_nc_cat=104&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=8eGcQyYXkxoAX_x-uRW&_nc_ht=scontent.fhio2-2.fna&oh=00_AT9Ks0pcLNyYRm1iKZQMd4_20UiThZ2R2cyZtuTkxr1PPg&oe=621BABE6" 
       class="w3-round w3-image " alt="Photo of Me" width="222" height="74">
     </div>
 
     <!-- Hide this text on small devices -->
     <div class="w3-col m6 w3-hide-small w3-padding-large">
-      <p>Our simple Dashboard allows for order management so easy, its like waving a magic wand</p>
+      <p style="color:black">Our simple Dashboard allows for order management so easy, its like waving a magic wand</p>
     </div>
   </div>
   <p class="w3-large w3-center w3-padding-16" style="color:black; font-weight:bold">Our Solution:</p>
   <p class="w3-wide" style="color:black; font-weight:bold"><i class="fa fa-camera"></i>On Time Deliveries:</p>
-  <div class="w3-light-grey">
+  <div class="w3-dark-grey">
     <div class="w3-container w3-padding-small w3-black w3-center" style="width:90%">90%</div>
   </div>
   <p class="w3-wide"style="color:black; font-weight:bold"><i class="fa fa-laptop"></i>Satisfied Customers:</p>
-  <div class="w3-light-grey">
+  <div class="w3-dark-grey">
     <div class="w3-container w3-padding-small w3-black w3-center" style="width:85%">85%</div>
   </div>
   <p class="w3-wide"style="color:black; font-weight:bold"><i class="fa fa-photo"></i>Profits Increased:</p>
-  <div class="w3-light-grey">
+  <div class="w3-dark-grey">
     <div class="w3-container w3-padding-small w3-black w3-center" style="width:75%">75%</div>
   </div>
 </div>
@@ -101,7 +102,7 @@
 <!-- Container (Portfolio Section) -->
 <div class="w3-content w3-container w3-padding-64" id="portfolio">
   <h3 class="w3-center">LIST OF CLIENTS</h3>
-  <p class="w3-center"><em>Here are some of our current clients.<br> Click on the images to make them bigger</em></p><br>
+  <p class="w3-center" style="color:black"><em>Here are some of our current clients.<br> Click on the images to make them bigger</em></p><br>
 
   <!-- Responsive Grid. Four columns on tablets, laptops and desktops. Will stack on mobile devices/small screens (100% width) -->
   <div class="w3-row-padding w3-center">
@@ -138,7 +139,7 @@
     <div class="w3-col m3">
       <img src="https://www.sk8clothing.com/UserFiles/Image/imgdir_2340/fallen_skate_logo.jpg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="Fallen Skate Company">
     </div>
-    <button class="w3-button w3-padding-large w3-light-grey" style="margin-top:64px">CLICK HERE TO JOIN</button>
+    <button class="w3-button w3-padding-large w3-light-grey" style="margin-top:64px; border-style:solid; font-weight:bold">CLICK HERE TO JOIN</button>
   </div>
 </div>
 
@@ -154,14 +155,14 @@
 <!-- Third Parallax Image with Portfolio Text -->
 <div class="bgimg-3 w3-display-container ">
   <div class="w3-display-middle">
-     <span class="w3-xxlarge w3-text-black w3-wide" style="color:black; font-weight:bold; position:relative; padding-left:5%">CONTACT US</span>
+     <span class="w3-xxlarge w3-text-black w3-wide" style="color:black; font-weight:bold; position:relative; width:100%">CONTACT US</span>
   </div>
 </div>
 
 <!-- Container (Contact Section) -->
 <div class="w3-content w3-container w3-padding-64" id="contact">
   <h3 class="w3-center">THIS IS A GCU PROJECT</h3>
-  <p class="w3-center"><em>We don't actually want your feedback!</em></p>
+  <p class="w3-center" style="color:black"><em>We don't actually want your feedback!</em></p>
 
   <div class="w3-row w3-padding-32 w3-section">
     <div class="w3-col m4 w3-container">
@@ -173,7 +174,7 @@
         <i class="fa fa-phone fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i> Phone: +1 555 5455 8588<br>
         <i class="fa fa-envelope fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i> Email: WarrenPeterson141414@Gmail.com<br>
       </div>
-      <p> <i class="fa fa-coffee"></i> feel free to leave us a note:</p>
+      <p style="color:black"> <i class="fa fa-coffee"></i> feel free to leave us a note:</p>
       <form action="/action_page.php" target="_blank">
         <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
           <div class="w3-half">
