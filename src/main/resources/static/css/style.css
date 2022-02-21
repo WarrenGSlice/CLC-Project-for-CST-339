@@ -534,8 +534,8 @@ h5 {
 		margin: 0em 0em .5em 0em;
 	}
 	.vidvid{
-		width: 115%;
-		right:5%;
+		width: 128%;
+		right:16%;
 	}
 }
 @media screen and (max-width: 414px){
@@ -578,8 +578,8 @@ h5 {
 		font-size: 18px;
 	}
 	.vidvid{
-		width: 110%;
-		right:3%;
+		width: 135%;
+		right:19%;
 	}
 }
 @media screen and (max-width: 375px){
@@ -587,8 +587,8 @@ h5 {
 		font-size: 1.5em;
 	}
 	.vidvid{
-		width: 110%;
-		right:3%;
+		width: 136%;
+		right:20%;
 	}
 }
 @media screen and (max-width: 320px){
@@ -614,8 +614,8 @@ h5 {
 		font-size: 13px;
 	}
 	.vidvid{
-		width: 110%;
-		right:3%;
+		width: 138%;
+		right:21%;
 	}
 }
 /** /Responsive **/
