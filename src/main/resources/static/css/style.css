@@ -327,10 +327,6 @@ h5 {
 }
 /** Responsive **/
 @media screen and (max-width: 3850px) and(min-width: 2640px){
-	.w3-display-container{
-		margin-top:0%;
-	/*	height:100%;*/
-	}
 	.container {
 		width: 100%;
 		height:auto;
@@ -342,9 +338,7 @@ h5 {
 	}
 }
 @media screen and (max-width: 2640px){
-	.w3-xxlarge {
-		font-size:200%;
-	}
+
 	.container {
 		width: 70%;
 		margin: 0 auto;
@@ -355,9 +349,7 @@ h5 {
 	}
 }
 @media screen and (max-width: 1920px){
-	.w3-xxlarge {
-		font-size:200%;
-	}
+
 	.container {
 		width: 70%;
 		margin: 0 auto;
