@@ -36,17 +36,17 @@
 					Invalid User Name or Password
 				</div>
 				
-				<form th:action="@{/login}" method="post">
+				<form th:action="@{/productClone/display}" th:object="${login}"method="post">
 					<label style="color:white">User Name</label>
 					<div class="input-group">
 						<span class="fa fa-envelope" aria-hidden="true"></span>
-						<input  type="text" name="username" id="username" placeholder="Enter UserName" class="form-control w3-hover-shadow w3-border w3-hover-border-red" required> 
+						<input  type="text" th:field="*{username}" name="username" id="username" placeholder="Enter UserName" class="form-control w3-hover-shadow w3-border w3-hover-border-red" required> 
 					</div>
 					
 					<label style="color:white">Password</label>
 					<div class="input-group">
 						<span class="fa fa-lock" aria-hidden="true"></span>
-						<input type="password" name="password" id="password" class="w3-hover-shadow w3-border w3-hover-border-red" placeholder="Enter Password" required>
+						<input type="password" th:field="*{password}" name="password" id="password" class="w3-hover-shadow w3-border w3-hover-border-red" placeholder="Enter Password" required>
 					</div> 
 
 					<div class="login-check">
