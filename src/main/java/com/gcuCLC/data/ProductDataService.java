@@ -1,9 +1,5 @@
 package com.gcuCLC.data;
 
-//import java.sql.Connection;
-//import java.sql.PreparedStatement;
-//import java.sql.SQLException;
-//import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,14 +7,10 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-//import org.springframework.jdbc.core.PreparedStatementCreator;
-//import org.springframework.jdbc.support.GeneratedKeyHolder;
-//import org.springframework.jdbc.support.KeyHolder;
 
-import com.gcuCLC.entity.OrderEntity;
-//import com.gcuCLC.entity.OrderEntity;
 import com.gcuCLC.entity.ProductsEntity;
 import com.gcuCLC.repository.ProductsRepository;
+
 
 public class ProductDataService implements DataAccessInterface<ProductsEntity> {
 

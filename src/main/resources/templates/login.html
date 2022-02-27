@@ -32,26 +32,27 @@
 			<div class="w3_info">
 				<h2>Login to your Account</h2>
 				<p>Enter your details to login.</p>
+				<div style="color:red" th:if="${param.error}">
+					Invalid User Name or Password
+				</div>
 				
-				<form action="#" th:action="@{doLogin}" th:object="${login}" method="post">
+				<form th:action="@{/login}" method="post">
 					<label style="color:white">User Name</label>
 					<div class="input-group">
 						<span class="fa fa-envelope" aria-hidden="true"></span>
-						<input  type="text"  class="form-control w3-hover-shadow w3-border w3-hover-border-red" 
-						th:field="*{username}" th:value="${username}" th:text="${username}" placeholder="Enter User Name" th:name="${username}" required> 
+						<input  type="text" name="username" id="username" placeholder="Enter UserName" class="form-control w3-hover-shadow w3-border w3-hover-border-red" required> 
 					</div>
-					<p style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">User Name Error
 					
 					<label style="color:white">Password</label>
 					<div class="input-group">
 						<span class="fa fa-lock" aria-hidden="true"></span>
-						<input type="password" th:field="*{password}" th:value="${password}"class="w3-hover-shadow w3-border w3-hover-border-red" placeholder="Enter Password" required>
+						<input type="password" name="password" id="password" class="w3-hover-shadow w3-border w3-hover-border-red" placeholder="Enter Password" required>
 					</div> 
-					<p style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error
+
 					<div class="login-check">
 						 <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i> Remember me</label>
 					</div>						
-						<button class="btn btn-danger btn-block w3-hover-green" type="submit">Login</button >    
+						<button style="font-weight:bold" class="btn btn-danger btn-block w3-hover-green" value="Sign In" type="submit">Log In</button >    
 				</form>
 				<p class="account">By clicking login, you agree to our <a href="#">Terms & Conditions!</a></p>
 				<p class="account1">Dont have an account? <a href="/register/">Register here</a></p>
