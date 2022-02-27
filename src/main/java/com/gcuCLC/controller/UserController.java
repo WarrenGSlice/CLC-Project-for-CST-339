@@ -114,7 +114,8 @@ public class UserController {
 
         if(pass.getCurPassword() == UserController.user.getPassword() && pass.getCode() == code)
         {
-
+            UserController.user.setPassword(password.getNewPassword());
+            userRepo.save(new UserEntity(UserController.user));
         }
 
         return "userSettings";
