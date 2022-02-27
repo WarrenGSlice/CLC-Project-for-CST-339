@@ -3,7 +3,6 @@ package com.gcuCLC.controller;
 
 
 
-import com.gcuCLC.repository.EditOrderRepository;
 
 import javax.servlet.http.HttpSession;
 
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gcuCLC.business.ProductsBusinessInterface;
-import com.gcuCLC.data.OrderDataService;
 import com.gcuCLC.entity.OrderEntity;
 import com.gcuCLC.entity.Orders;
 import com.gcuCLC.model.Login;
@@ -33,17 +31,19 @@ import com.gcuCLC.repository.OrdersRepository;
 public class ProductController {
 	
 	
-	@Autowired
-	private EditOrderRepository editRepo;
+//	@Autowired
+//	private EditOrderRepository editRepo;
 	
 	@Autowired
 	private ProductsBusinessInterface service;
 	
-	@Autowired
-	private OrderDataService ods;
+//	@Autowired
+//	private OrderDataService ods;
 	
 	@Autowired
 	private OrdersRepository orderRepo;
+
+	
 	
 	public static OrderEntity orderEnt;
 	
@@ -84,6 +84,24 @@ public class ProductController {
 		model.addAttribute("products" , service.getProducts());
 		model.addAttribute("login", new Login());
 		//model.addAttribute("viewOrders", orderEntity);
+		
+		return "viewOrders";
+	}
+	
+	public static Login login = new Login();
+	
+	@SuppressWarnings("static-access")
+	@GetMapping("/display")
+	public String loginUser(/*@Valid*/@ModelAttribute Login login, Model model) {		
+		
+		//service.getProducts();
+		this.login  = login;
+		
+		// Display something
+		model.addAttribute("title", "Login Form");
+		model.addAttribute("products", service.getProducts());
+		model.addAttribute("orderEntity", new OrderEntity());
+		
 		
 		return "viewOrders";
 	}

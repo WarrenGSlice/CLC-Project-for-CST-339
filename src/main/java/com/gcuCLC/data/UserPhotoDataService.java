@@ -8,13 +8,14 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Service;
 
-import com.gcuCLC.entity.OrderEntity;
 import com.gcuCLC.entity.UserEntity;
 import com.gcuCLC.entity.UserPhotoEntity;
 import com.gcuCLC.repository.UserPhotoRepository;
 import com.gcuCLC.repository.UserRepository;
 
+@Service
 public class UserPhotoDataService implements DataAccessInterface<UserPhotoEntity>, DataAcessUserImageInterface<UserPhotoEntity>{
 
 	@Autowired

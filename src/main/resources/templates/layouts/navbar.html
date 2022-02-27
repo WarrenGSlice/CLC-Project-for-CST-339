@@ -17,10 +17,16 @@
     <a class="w3-bar-item w3-button w3-hover-black w3-hide-medium w3-hide-large w3-right" href="javascript:void(0);" onmouseover="toggleFunction()" onclick="toggleFunction()" title="Toggle Navigation Menu">
       <i class="fa fa-bars"></i>
     </a>
-    <a href="/" class="w3-bar-item w3-button w3-hover-white">HOME</a>
-    <a href="#about" class="w3-bar-item w3-button w3-hide-small w3-hover-white"><i class="fa fa-user"></i> ABOUT</a>
-    <a href="/login/" class="w3-bar-item w3-button w3-hide-small w3-hover-white"><i class="fa fa-th"></i> DASHBOARD LOGIN</a>
-    <a href="/register/" class="w3-bar-item w3-button w3-hide-small w3-hover-white"><i class="fa fa-envelope"></i> REGISTER</a>
+    <a href="/" class="w3-bar-item w3-button w3-hover-white"><i class="fa fa-home"></i> HOME</a>
+    <a href="#about" class="w3-bar-item w3-button w3-hide-small w3-hover-white"><i class="fa fa-info"></i> ABOUT</a>
+    <a href="/login/" class="w3-bar-item w3-button w3-hide-small w3-hover-white"><i class="fa fa-sign-in"></i> DASHBOARD LOGIN</a>
+    <a href="/register/" class="w3-bar-item w3-button w3-hide-small w3-hover-white"><i class="fa fa-user-plus"></i> REGISTER</a>
+    <div>
+		<form method="POST" th:action="@{/logout}">
+			<a href="/logout" th:action="@{/logout}" type="submit" class="w3-bar-item w3-button w3-hide-small w3-hover-white"><i class="fa fa-sign-out"></i> SIGN OUT</a>
+		</form>
+    </div>
+	
     <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-white">
       <i class="fa fa-search"></i>
     </a>
@@ -31,7 +37,12 @@
     <a href="#about" class="w3-bar-item w3-button" onclick="toggleFunction()">ABOUT</a>
     <a href="/login/" class="w3-bar-item w3-button" onclick="toggleFunction()">DASHBOARD LOGIN</a>
     <a href="/register/" class="w3-bar-item w3-button" onclick="toggleFunction()">REGISTER</a>
-    <a href="/" class="w3-bar-item w3-button">SIGN OUT</a>
+    <div>
+		<form method="POST" th:action="@{/logout}">
+			<a href="/logout" th:action="@{/logout}" type="submit" class="w3-bar-item w3-button"> SIGN OUT</a>
+		</form>
+    </div>
+
   </div>
 </div>
 </div>

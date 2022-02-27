@@ -6,17 +6,18 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import com.gcuCLC.data.DataAccessInterface;
 import com.gcuCLC.data.OrderDataService;
 import com.gcuCLC.entity.OrderEntity;
 //import com.gcuCLC.entity.ProductsEntity;
 import com.gcuCLC.model.ProductModel;
 
+@Service
 public class ProductsBusinessService implements ProductsBusinessInterface{
 	
-	@Autowired
-	private DataAccessInterface orderDAO;
+//	@Autowired
+//	private DataAccessInterface orderDAO;
 	@Autowired
 	private OrderDataService service;
 	//public List<ProductModel> Inventory = new ArrayList<>();

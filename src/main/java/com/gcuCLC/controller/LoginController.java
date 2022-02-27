@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 //import org.springframework.web.servlet.ModelAndView;
 
 import com.gcuCLC.business.ProductsBusinessInterface;
-import com.gcuCLC.business.SecurityBusinessService;
 import com.gcuCLC.data.OrderDataService;
 import com.gcuCLC.entity.OrderEntity;
 import com.gcuCLC.entity.Orders;
@@ -33,7 +32,6 @@ import com.gcuCLC.repository.OrdersRepository;
 // Login Controller controls Login Page Actions
 @SuppressWarnings("unused")
 @Controller
-@RequestMapping("/login")
 public class LoginController {
 	
 	@Autowired
@@ -45,15 +43,13 @@ public class LoginController {
 	
 	@Autowired
 	private OrdersRepository orderRepo;
-	
-	@Autowired
-	private SecurityBusinessService security;
+
 	
 	// Show Login form
-	@GetMapping("/")
+	@GetMapping("/login")
 	public String display(Model model) {
 		model.addAttribute("title", "Login Form");
-		model.addAttribute("login", new Login());
+		//model.addAttribute("login", new Login());
 		return "login";
 	}
 	
@@ -62,39 +58,39 @@ public class LoginController {
 	
 	// Login user
 
-	@SuppressWarnings("static-access")
-	@PostMapping("/doLogin")
-	public String loginUser(@Valid@ModelAttribute Login login, BindingResult bindingResult, Model model) {		
-		
-		
-		service.test();
-		security.authenticate("username", "password");
-		
-		// Check for validation errors
-		if (bindingResult.hasErrors()) {
-			model.addAttribute("title", "Login Form");
-			return "login";
-		}
-		
-		//service.getProducts();
-		this.login = login;
-		
-		// Display something
-		model.addAttribute("title", "Login Form");
-		model.addAttribute("products", service.getProducts());
-		model.addAttribute("orderEntity", new OrderEntity());
-		
-		
-		return "viewOrders";
-	}
+//	@SuppressWarnings("static-access")
+//	@PostMapping("/doLogin")
+//	public String loginUser(/*@Valid*/@ModelAttribute Login login, BindingResult bindingResult, Model model) {		
+//		
+//		
+//		service.test();
+//		//security.authenticate("username", "password");
+//		
+//		// Check for validation errors
+//		if (bindingResult.hasErrors()) {
+//			model.addAttribute("title", "Login Form");
+//			return "login";
+//		}
+//		
+//		//service.getProducts();
+//		this.login = login;
+//		
+//		// Display something
+//		model.addAttribute("title", "Login Form");
+//		model.addAttribute("products", service.getProducts());
+//		model.addAttribute("orderEntity", new OrderEntity());
+//		
+//		
+//		return "viewOrders";
+//	}
 	
-	@SuppressWarnings("static-access")
-	@RequestMapping("/signout")
-	public String signout() {		
-		this.login = null;
-		UserController.user = null;
-
-		return "index";
-	}
+//	@SuppressWarnings("static-access")
+//	@RequestMapping("/signout")
+//	public String signout() {		
+//		this.login = null;
+//		UserController.user = null;
+//
+//		return "index";
+//	}
 		
 }

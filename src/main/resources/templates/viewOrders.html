@@ -115,7 +115,10 @@ function openPage(pageName, elmnt, color) {
             	<a href="/register/"><span class="fa fa-id-card-o mr-3"></span> Register</a>
           	</li>
           	<li>
-            	<a href="/login/signout"><span class="fa fa-sign-out mr-3"></span> Sign Out</a>
+          		<form method="POST" th:action="@{/logout}">
+          			<a href="/logout" th:action="@{/logout}" type="submit"><span class="fa fa-sign-out mr3"></span> Sign Out</a>
+          		</form>	
+            <!--  	<a href="/login/signout"><span class="fa fa-sign-out mr-3"></span> Sign Out</a> -->
           	</li>
         	</ul>
 
