@@ -7,11 +7,12 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Service;
 
-import com.gcuCLC.entity.OrderEntity;
 import com.gcuCLC.entity.UserEntity;
 import com.gcuCLC.repository.UserRepository;
 
+@Service
 public class UserDataService implements DataAccessInterface<UserEntity>, DataAccessUserInterface<UserEntity>{
 
 	@Autowired
@@ -25,12 +26,12 @@ public class UserDataService implements DataAccessInterface<UserEntity>, DataAcc
 	/**
 	 * Non-Default Constructor for constructor injection
 	 */
-	public UserDataService(UserRepository usersRepository, DataSource dataSource) {
+	public UserDataService(UserRepository usersRepository, DataSource dataSource) { // 2/26/2022 comment out
 		this.usersRepository = usersRepository;
 		this.dataSource = dataSource;
 		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
 	}
-	
+
 	/**
 	 * CRUD: finder to return all user entities
 	 */
@@ -177,34 +178,44 @@ public class UserDataService implements DataAccessInterface<UserEntity>, DataAcc
 		}
 	}
 
-	@SuppressWarnings("deprecation")
-	@Override
-	public UserEntity findByUsername(String username) {
-		{
-			String sql = "SELECT * FROM USER WHERE USER_NAME = ?";
-			UserEntity users =new UserEntity();
-			try
-			{
-				users = jdbcTemplateObject.queryForObject(sql, new Object[]{username}, (rs, rowNum) ->
-					    new UserEntity((long) rs.getInt("USER_ID"),
-									  rs.getString("USER_NAME"),
-									  rs.getString("FIRST_NAME"),
-									  rs.getString("LAST_NAME"),
-									  rs.getString("ADDRESS"),
-									  rs.getString("CITY"),
-									  rs.getString("STATE"),
-									  rs.getString("ZIP"),
-									  rs.getString("EMAIL"),
-									  rs.getString("PASSWORD"),
-									  rs.getString("BUSINESS_NAME"),
-									  rs.getString("PHONE")));		
-			}
-			catch (Exception e)
-			{
-				e.printStackTrace();
-			}
-			return (UserEntity) users;
-		}
+//	@SuppressWarnings("deprecation")
+//	@Override
+//	public UserEntity findByUsername(String username) {
+//		{
+//			String sql = "SELECT * FROM USER WHERE USER_NAME = ?";
+//			UserEntity users =new UserEntity();
+//			try
+//			{
+//				users = jdbcTemplateObject.queryForObject(sql, new Object[]{username}, (rs, rowNum) ->
+//					    new UserEntity((long) rs.getInt("USER_ID"),
+//									  rs.getString("USER_NAME"),
+//									  rs.getString("FIRST_NAME"),
+//									  rs.getString("LAST_NAME"),
+//									  rs.getString("ADDRESS"),
+//									  rs.getString("CITY"),
+//									  rs.getString("STATE"),
+//									  rs.getString("ZIP"),
+//									  rs.getString("EMAIL"),
+//									  rs.getString("PASSWORD"),
+//									  rs.getString("BUSINESS_NAME"),
+//									  rs.getString("PHONE")));		
+//			}
+//			catch (Exception e)
+//			{
+//				e.printStackTrace();
+//			}
+//			return (UserEntity) users;
+//		}
+//	}
+	
+	/**
+	 * CRUD: finder to return an entity by User name
+	 * @param username
+	 * @return
+	 */
+	public UserEntity findByUsername(String username)
+	{
+		return usersRepository.findByUsername(username);
 	}
 
 //	@SuppressWarnings("deprecation")

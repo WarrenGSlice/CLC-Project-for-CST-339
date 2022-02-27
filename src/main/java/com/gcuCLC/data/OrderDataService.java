@@ -5,21 +5,21 @@ import java.util.List;
 
 import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gcuCLC.entity.OrderEntity;
 import com.gcuCLC.repository.EditOrderRepository;
 import com.gcuCLC.repository.OrdersRepository;
 
-
+@Service
 public class OrderDataService implements DataAccessInterface<OrderEntity>{
 
 	@Autowired
 	private EditOrderRepository editRepo;
 	@Autowired
 	private OrdersRepository ordersRepository;
-//	@Autowired
-//	private DataAccessInterface<OrderEntity> OrderDAO;
+
 	@SuppressWarnings("unused")
 	private DataSource dataSource;
 	private JdbcTemplate jdbcTemplateObject;
