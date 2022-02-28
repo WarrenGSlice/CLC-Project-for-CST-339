@@ -92,7 +92,10 @@ function openPage(pageName, elmnt, color) {
 	  		<div class="img bg-wrap text-center py-4" style="background-image: url(/images/bg_1.jpg);">
 	  			<div class="user-logo">
 	  				<div class="img" style="background-image: url(/images/logo.jpg);"></div>
-	  				<h3 th:text="${login.username}"></h3>
+	  				<div sec:authorize="isAuthenticated()">
+	  					<span sec:authentication="name"></span>
+	  					<h3 th:text="${login.username}"></h3>
+	  				</div>
 	  			</div>
 	  		</div>
         	<ul class="list-unstyled components mb-5">
@@ -131,7 +134,10 @@ function openPage(pageName, elmnt, color) {
       			<h1 style="display:inline-block; color:green;"sec:authentication="name">  </h1>
       			<h1 style="display:inline-block; color:green">   for Choosing Shoe Fly</h1>
       			<h2 style="display:inline-block; color:green"> Click the different tabs below to views your different order options</h2>
-
+				<span sec:authentication="principal.email">Email</span>
+      			  <span sec:authentication="principal.firstName">FirstName</span>
+      			  <span sec:authentication="principal.lastName">LastName</span>
+      			  <span sec:authentication="principal.address">Address</span>
       		</div>
         	<!-- <div class="tab-content">
         		<div id="itemDetailsTab" class="container-fluid tab-pane active">

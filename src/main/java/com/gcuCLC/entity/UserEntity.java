@@ -1,7 +1,7 @@
 package com.gcuCLC.entity;
 
 import java.util.Random;
-
+import java.util.Set;
 import com.gcuCLC.model.User;
 
 import org.springframework.data.annotation.Id;
@@ -84,6 +84,22 @@ public class UserEntity {
 		this.password = password;
 		this.businessName = businessName;
 		this.phone = phone;
+	}
+	
+	public UserEntity(String username, String password, String firstName, String lastName, String businessName,
+			String address, String city, String email, String phone, String zip, String state) {
+		this.username = getUsername();
+		this.password = getPassword();
+		this.firstName = getFirstName();
+		this.lastName = getLastName();
+		this.businessName = getBusinessName();
+		this.address = getAddress();
+		this.city = getCity();
+		this.email = getEmail();
+		this.phone = getPhone();
+		this.zip = getZip();
+		this.state = getState();
+
 	}
 
 	public String getPhone()
@@ -184,5 +200,15 @@ public class UserEntity {
 		this.businessName = businessName;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public Set<UserEntity> getUsers() {
+		// TODO Auto-generated method stub
+		return (Set<UserEntity>) new UserEntity(getUsername(), getFirstName(), getLastName(), getBusinessName(), getAddress(),
+				getCity(), getState(), getEmail(), getPhone(), getZip(), getPassword());
+	}
 	
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
+	}
 }

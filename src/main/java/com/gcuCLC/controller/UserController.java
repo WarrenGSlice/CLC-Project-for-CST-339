@@ -53,7 +53,7 @@ public class UserController {
 
     // Show User Settings form
     @GetMapping("/")
-    public String showUserSettings(Login login, Model model) {
+    public String showUserSettings(Login login, Model model, UserEntity userEntity) {
         if (user == null)
             user = new User(LoginController.login.getUsername(), LoginController.login.getPassword(), "First", "Last",
                     "Email", "Business", "Address", "City", "Zip", "000-000-0001", "State");
@@ -69,12 +69,13 @@ public class UserController {
         }
 
         model.addAttribute("user", UserController.user);
+        model.addAttribute("login", LoginController.login);
         return "userSettings";
     }
 
     // Register new user
     @PostMapping("/changeSettings")
-    public String saveUser(@ModelAttribute @Valid User user, BindingResult bindingResult, Model model) {
+    public String saveUser(@ModelAttribute @Valid User user, BindingResult bindingResult, Model model, Login login, UserEntity userEntity) {
         if (user.getFirstName() != null)
             UserController.user.setFirstName(user.getFirstName());
         if (user.getLastName() != null)

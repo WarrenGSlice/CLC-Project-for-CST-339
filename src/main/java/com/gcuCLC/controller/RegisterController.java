@@ -1,11 +1,6 @@
 package com.gcuCLC.controller;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.sql.Connection;
-import java.sql.SQLException;
 
-import javax.sql.DataSource;
 
 /** * * * * * * * * * * * * * * *
  * CST-339 CLC Milestone Project
@@ -17,8 +12,7 @@ import javax.sql.DataSource;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.jdbc.DataSourceBuilder;
-//import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,7 +22,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.gcuCLC.repository.UserRepository;
-import com.gcuCLC.data.UserDataService;
 import com.gcuCLC.entity.UserEntity;
 import com.gcuCLC.model.Login;
 //import com.gcuCLC.business.ProductsBusinessInterface;
