@@ -6,7 +6,7 @@
 <!-- Products Page -->
 
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:layout="https://ultraq.net.nz/thymeleaf/layout" >
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:layout="https://ultraq.net.nz/thymeleaf/layout" xmlns:sec="https://thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <meta charset="utf-8">
 
@@ -126,9 +126,13 @@ function openPage(pageName, elmnt, color) {
 
         <!-- Page Content  -->
       	<div id="content" layout:fragment="content" class="p-4 p-md-5 pt-5">
-        	<h2 class="mb-4" th:text="${login.username}" style="display:inline-block; color:green" ></h2>
-        	<h1 style="display:inline-block; color:green">-Has Successfully Logged in</h1>
-        	
+        	<div sec:authorize="isAuthenticated()">
+      			<h1 style="display:inline-block; color:green" >Thank You  </h1> 
+      			<h1 style="display:inline-block; color:green;"sec:authentication="name">  </h1>
+      			<h1 style="display:inline-block; color:green">   for Choosing Shoe Fly</h1>
+      			<h2 style="display:inline-block; color:green"> Click the different tabs below to views your different order options</h2>
+
+      		</div>
         	<!-- <div class="tab-content">
         		<div id="itemDetailsTab" class="container-fluid tab-pane active">
         		<div class="p-2">
