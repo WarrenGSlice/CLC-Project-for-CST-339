@@ -1,65 +1,86 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
-<meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css">
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>
-<script>
-$(document).ready( function () {
-    $('#table_id').DataTable();
-} );
-</script>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css">
+	<script type="text/javascript" charset="utf8"
+		src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>
+	<script>
+		$(document).ready(function ()
+		{
+			$('#table_id').DataTable();
+		});
+	</script>
 
-<div th:fragment="productTable">
+	<div th:fragment="productTable">
 
-    			<div class="d-flex justify-content-center row">
-       				<div class="col-md-20">
-            			<div class="rounded">
-                			<div class="table-responsive table-borderless">
-        	<!-- Original Table Content -->
-								<table id="table_id" class="display" style="width:100%" >
-									<thead style="background: #dddcdc">
-										<tr>
-											<th class="text-center">
-												<div class="toggle-btn">
-													<div class="inner-circle"></div>
-												</div>
-											</th>
-											<th style="text-align:center; color:black;">Order ID</th>
-											<th style="text-align:center; color:black;">Company Name</th>
-											<th style="text-align:center; color:black;">Customer Name</th>
-											<th style="text-align:center; color:black;">Delivery Date</th>
-											<th style="text-align:center; color:black;">Delivery Price</th>											
-											<th style="text-align:center; color:black;">Delivery Status</th>
-											<th style="text-align:center; color:black;">Payment</th>
-											<th></th>
-										</tr>
-									</thead>
-									<tbody class="table-body">
-										<!-- <tr class="cell-1" th:if="${products.empty}">
+		<form th:action="@{/productClone/search}" method="get">
+			<input type="text" name="searchTerm" th:value="${searchTerm}" placeholder="Enter <id/company/customer/date/price/status/payment>:<search value>" size="100"/>
+			<button type="submit" class="btn btn-info">Search</button>
+			<button type="submit" class="btn btn-info">Reset</button>
+		</form>
+
+		<div class="d-flex justify-content-center row">
+			<div class="col-md-20">
+				<div class="rounded">
+					<div class="table-responsive table-borderless">
+						<!-- Original Table Content -->
+						<table id="table_id" class="display" style="width:100%">
+							<thead style="background: #dddcdc">
+								<tr>
+									<th class="text-center">
+										<div class="toggle-btn">
+											<div class="inner-circle"></div>
+										</div>
+									</th>
+									<th style="text-align:center; color:black;">Order ID</th>
+									<th style="text-align:center; color:black;">Company Name</th>
+									<th style="text-align:center; color:black;">Customer Name</th>
+									<th style="text-align:center; color:black;">Delivery Date</th>
+									<th style="text-align:center; color:black;">Delivery Price</th>
+									<th style="text-align:center; color:black;">Delivery Status</th>
+									<th style="text-align:center; color:black;">Payment</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody class="table-body">
+								<!-- <tr class="cell-1" th:if="${products.empty}">
 											<td style="text-align:center" colspan="4">No Orders Available</td>
 										</tr> -->
-										<tr class="cell-1"  th:each="product:${products}">
-											<td class="text-center">
-												<div class="toggle-btn">
-													<div class="inner-circle"></div>
-												</div>
-											</td>
-											<td style="text-align:center"><h5 th:text="${product.orderId}">000001</h5></td>
-											<td style="text-align:center"><h5 th:text="${product.companyName}">Nike</h5></td>
-											<td style="text-align:center"><h5 th:text="${product.customerName}">Warren Peterson</h5></td>											
-											<td style="text-align:center"><h5 th:text="${product.deliveryDate}">11/15/2020</h5></td>
-											<td style="text-align:center"><h5 th:text="${product.deliveryPrice}">200</h5></td>											
-											<td style="text-align:center"><span class="badge" style="color:black" th:text="${product.deliveryStatus}">Shipped</span></td>
-											<td style="text-align:center"><h5 th:text="${product.payment}">PayPal</h5></td>
-										</tr>
-									</tbody>
-								</table>
-		<!-- Original Table Content -->
-							</div>
-            			</div>
-        			</div>
-    			</div>
-			
+								<tr class="cell-1" th:each="product:${products}">
+									<td class="text-center">
+										<div class="toggle-btn">
+											<div class="inner-circle"></div>
+										</div>
+									</td>
+									<td style="text-align:center">
+										<h5 th:text="${product.orderId}">000001</h5>
+									</td>
+									<td style="text-align:center">
+										<h5 th:text="${product.companyName}">Nike</h5>
+									</td>
+									<td style="text-align:center">
+										<h5 th:text="${product.customerName}">Warren Peterson</h5>
+									</td>
+									<td style="text-align:center">
+										<h5 th:text="${product.deliveryDate}">11/15/2020</h5>
+									</td>
+									<td style="text-align:center">
+										<h5 th:text="${product.deliveryPrice}">200</h5>
+									</td>
+									<td style="text-align:center"><span class="badge" style="color:black"
+											th:text="${product.deliveryStatus}">Shipped</span></td>
+									<td style="text-align:center">
+										<h5 th:text="${product.payment}">PayPal</h5>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<!-- Original Table Content -->
+					</div>
+				</div>
+			</div>
+		</div>
 
-</div>
+
+	</div>
