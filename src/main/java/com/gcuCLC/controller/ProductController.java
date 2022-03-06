@@ -2,7 +2,6 @@ package com.gcuCLC.controller;
 
 
 import javax.servlet.http.HttpSession;
-import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,14 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gcuCLC.business.ProductsBusinessInterface;
-import com.gcuCLC.data.UserDataService;
 import com.gcuCLC.entity.OrderEntity;
 import com.gcuCLC.entity.Orders;
 import com.gcuCLC.model.Login;
 import com.gcuCLC.model.ProductModel;
 import com.gcuCLC.model.User;
 import com.gcuCLC.repository.OrdersRepository;
-import com.gcuCLC.repository.UserRepository;
 
 
 
@@ -42,6 +39,8 @@ public class ProductController {
 	
 	@Autowired
 	private OrdersRepository orderRepo;
+
+	
 	
 	public static OrderEntity orderEnt;
 	
@@ -80,26 +79,21 @@ public class ProductController {
 		model.addAttribute("title" , "View All Orders");
 		model.addAttribute("orderEntity", new OrderEntity());
 		model.addAttribute("products" , service.getProducts());
-		model.addAttribute("login", this.login);
+		model.addAttribute("login", new Login());
 		//model.addAttribute("viewOrders", orderEntity);
 		
 		return "viewOrders";
 	}
 	
 	public static Login login = new Login();
-	@Autowired
-	private UserRepository userRepo;
-	@Autowired
-	private DataSource dataSource;
-
+	
 	@SuppressWarnings("static-access")
-	@PostMapping("/display")
-	public String loginUser(Login login, Model model) {		
+	@GetMapping("/display")
+	public String loginUser(/*@Valid*/@ModelAttribute Login login, Model model) {		
 		
 		//service.getProducts();
-		ProductController.login  = login;
-		UserDataService uds = new UserDataService(userRepo, dataSource);
-		UserController.user = new User(uds.findByUsername(login.getUsername()));
+		this.login  = login;
+		
 		// Display something
 		model.addAttribute("title", "Login Form");
 		model.addAttribute("products", service.getProducts());
