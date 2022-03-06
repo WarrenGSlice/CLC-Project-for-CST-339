@@ -15,7 +15,22 @@ public interface OrdersRepository extends CrudRepository<OrderEntity,Long> {
 	@Query(value= "SELECT * FROM ORDERS")
 	public List<OrderEntity> findAll();
 	
-
+	public List<OrderEntity> findByCompanyName(String companyName);
+	
+	@Query(value= "SELECT * FROM ORDERS")
+	public List<OrderEntity> findByCustomerName(String customerName);
+	
+	@Query(value= "SELECT * FROM ORDERS")
+	public List<OrderEntity> findByDeliveryDate(String deliveryDate);
+	
+	@Query(value= "SELECT * FROM ORDERS")
+	public List<OrderEntity> findByDeliveryPrice(Integer deliveryPrice);
+	
+	@Query(value= "SELECT * FROM ORDERS")
+	public List<OrderEntity> findByDeliveryStatus(String deliveryStatus);
+	
+	@Query(value= "SELECT * FROM ORDERS")
+	public List<OrderEntity> findByPayment(String payment);
 	
 	@Query(value= "SELECT * FROM ORDERS")
 	public List<OrderEntity> findById(String orderId);

@@ -2,8 +2,9 @@ package com.gcuCLC.data;
 
 import java.util.List;
 
-import com.gcuCLC.entity.OrderEntity;
+import org.springframework.stereotype.Service;
 
+@Service
 public interface DataAccessInterface<T> {
 
 	public List<T> findAll();

@@ -12,6 +12,12 @@ $(document).ready( function () {
 
 <div th:fragment="productTable">
 
+			<form th:action="@{/productClone/search}" method="get">
+				<input type="text" name="searchTerm" th:value="${searchTerm}" placeholder="Enter <id/company/customer/date/price/status/payment>:<search value>" size="100"/>
+					<button type="submit" class="btn btn-info">Search</button>
+					<button type="submit" class="btn btn-info">Reset</button>
+			</form>
+
     			<div class="d-flex justify-content-center row">
        				<div class="col-md-20">
             			<div class="rounded">

@@ -19,6 +19,87 @@ public class ProductModel {
 	public String payment;
 	public String deliveryStatus;
 	
+	/**
+	 * 
+	 * @param orderId
+	 * @param companyName
+	 * @param customerName
+	 * @param deliveryDate
+	 * @param deliveryPrice
+	 * @param deliveryStatus
+	 * @param payment
+	 */
+	public ProductModel(Integer orderId,  String companyName, String customerName,String deliveryDate, Integer deliveryPrice,
+			String deliveryStatus, String payment) {
+		this.orderId = orderId;
+		this.customerName = customerName;
+		this.companyName = companyName;
+		this.deliveryDate = deliveryDate;
+		this.deliveryPrice = deliveryPrice;
+		this.payment = payment;
+		this.deliveryStatus = deliveryStatus;
+	}
+	
+	/**
+	 * 
+	 * @param companyName
+	 * @param customerName
+	 * @param deliveryDate
+	 * @param deliveryPrice
+	 * @param deliveryStatus
+	 * @param payment
+	 */
+	public ProductModel(String companyName, String customerName,  String deliveryDate, Integer deliveryPrice,
+			String deliveryStatus, String payment) {
+		this.customerName = customerName;
+		this.companyName = companyName;
+		this.deliveryDate = deliveryDate;
+		this.deliveryPrice = deliveryPrice;
+		this.payment = payment;
+		this.deliveryStatus = deliveryStatus;
+		
+	}
+	
+	/**
+	 * 
+	 */
+	public ProductModel() {
+		
+	}
+	
+	/**
+	 * Non-Default Constructor (Blank)
+	 * @param input - assigned to order id (typically -1)
+	 */
+	public ProductModel(int input) {
+		super();
+		this.orderId = input;
+		this.companyName = "";
+		this.customerName = "";
+		this.deliveryDate = "";
+		this.deliveryPrice = -1;
+		this.deliveryStatus = "";
+		this.payment = "";	
+	}
+	// Passes properties of a Product and stores them an an array
+	/**
+	 * 
+	 * @param productArray
+	 */
+	public ProductModel(String[] productArray) {
+		this.orderId = Integer.parseInt(productArray[0]);
+		this.customerName = productArray[1];
+		this.companyName = productArray[2];
+		this.deliveryDate = productArray[3];
+		this.deliveryPrice = Integer.parseInt(productArray[4]);
+		this.payment = productArray[5];
+		this.deliveryStatus = productArray[6];
+	}
+	
+	/**
+	 * 
+	 * @return deliveryStatus
+	 */
 	public String getDeliveryStatus() {
 		return deliveryStatus;
 	}
@@ -61,41 +142,7 @@ public class ProductModel {
 	public void setPayment(String payment) {
 		this.payment = payment;
 	}
-	public ProductModel(Integer orderId,  String companyName, String customerName,String deliveryDate, Integer deliveryPrice,
-			String deliveryStatus, String payment) {
-		this.orderId = orderId;
-		this.customerName = customerName;
-		this.companyName = companyName;
-		this.deliveryDate = deliveryDate;
-		this.deliveryPrice = deliveryPrice;
-		this.payment = payment;
-		this.deliveryStatus = deliveryStatus;
-	}
 	
-	public ProductModel(String companyName, String customerName,  String deliveryDate, Integer deliveryPrice,
-			String deliveryStatus, String payment) {
-		this.customerName = customerName;
-		this.companyName = companyName;
-		this.deliveryDate = deliveryDate;
-		this.deliveryPrice = deliveryPrice;
-		this.payment = payment;
-		this.deliveryStatus = deliveryStatus;
-		
-	}
-	
-	public ProductModel() {
-		
-	}
-	// Passes properties of a Product and stores them an an array
-	public ProductModel(String[] productArray) {
-		this.orderId = Integer.parseInt(productArray[0]);
-		this.customerName = productArray[1];
-		this.companyName = productArray[2];
-		this.deliveryDate = productArray[3];
-		this.deliveryPrice = Integer.parseInt(productArray[4]);
-		this.payment = productArray[5];
-		this.deliveryStatus = productArray[6];
-	}
 	// Helps the constructor pass the correct objects to the array in the correct form
 	public String[] ToArray() {
 		return new String[] {

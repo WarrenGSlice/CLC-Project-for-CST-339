@@ -17,6 +17,8 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,10 +28,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.gcuCLC.business.ProductsBusinessInterface;
+import com.gcuCLC.business.UserBusinessService;
 import com.gcuCLC.entity.UserEntity;
 import com.gcuCLC.model.Login;
 import com.gcuCLC.model.Password;
 import com.gcuCLC.model.User;
+import com.gcuCLC.model.gcuCLCuserDetails;
 import com.gcuCLC.repository.UserRepository;
 
 // User Controller controls User Settings Actions
@@ -45,6 +49,9 @@ public class UserController {
     private ProductsBusinessInterface bservice;
     
     @Autowired
+    private UserBusinessService userService;
+    
+    @Autowired
     private JavaMailSender mailSender;
     private Password password;
 
@@ -53,13 +60,14 @@ public class UserController {
 
     // Show User Settings form
     @GetMapping("/")
-    public String showUserSettings(Login login, Model model, UserEntity userEntity) {
+    public String showUserSettings(Login login, Model model, UserEntity userEntity, @AuthenticationPrincipal gcuCLCuserDetails loggedUser) {
         if (user == null)
             user = new User(LoginController.login.getUsername(), LoginController.login.getPassword(), "First", "Last",
                     "Email", "Business", "Address", "City", "Zip", "000-000-0001", "State");
         model.addAttribute("title", "Settings Form");
         model.addAttribute("login", LoginController.login);
-        
+        String username = loggedUser.getUsername();
+        userEntity = userRepo.findByUsername(username);
         UserEntity ue;
         //UserDataService uds = new UserDataService(null, getDataSource());
         if(userRepo.findByUsernameAndPassword(LoginController.login.getUsername(), LoginController.login.getPassword()) != null)
@@ -67,7 +75,18 @@ public class UserController {
             ue = userRepo.findByUsername(LoginController.login.getUsername());
             UserController.user = new User(ue);
         }
-
+//        loggedUser.setFirstName(user.getFirstName());
+//        loggedUser.setLastName(user.getLastName());
+//        loggedUser.setBusinessName(user.getBusinessName());
+//        loggedUser.setAddress(user.getAddress());
+//        loggedUser.setEmail(user.getEmail());
+//        loggedUser.setPhone(user.getPhone());
+//        loggedUser.setCity(user.getCity());
+//        loggedUser.setState(user.getState());
+//        loggedUser.setZip(user.getZip());
+        //UserDetails username = UserBusinessService.loadUserByUsername();
+		//UserDetails username = userService.loadUserByUsername();
+        model.addAttribute("user", userEntity);
         model.addAttribute("user", UserController.user);
         model.addAttribute("login", LoginController.login);
         return "userSettings";
@@ -75,7 +94,8 @@ public class UserController {
 
     // Register new user
     @PostMapping("/changeSettings")
-    public String saveUser(@ModelAttribute @Valid User user, BindingResult bindingResult, Model model, Login login, UserEntity userEntity) {
+    public String saveUser(@ModelAttribute @Valid User user, BindingResult bindingResult, Model model, Login login, UserEntity userEntity,
+    						@AuthenticationPrincipal gcuCLCuserDetails loggedUser) {
         if (user.getFirstName() != null)
             UserController.user.setFirstName(user.getFirstName());
         if (user.getLastName() != null)

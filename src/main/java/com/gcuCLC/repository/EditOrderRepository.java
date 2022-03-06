@@ -15,4 +15,6 @@ import com.gcuCLC.entity.OrderEntity;
 public interface EditOrderRepository extends Repository<OrderEntity,Integer> {
 	
 	List<OrderEntity> findByOrderId(Integer orderId);
+	
+	List<OrderEntity> findByCompanyName(String companyName);
 }

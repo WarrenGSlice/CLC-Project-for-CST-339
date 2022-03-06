@@ -45,6 +45,17 @@ public class OrderEntity {
 		deliveryStatus = order.getDeliveryStatus();
 		payment = order.getPayment();
 	}
+	
+	public OrderEntity Construct(String input) {
+		orderId = -1;
+		companyName = "";
+		customerName = "";
+		deliveryDate = "";
+		deliveryPrice = -1;
+		deliveryStatus = "";
+		payment = "";
+		return new OrderEntity(orderId = -1, companyName = "", customerName = "", deliveryDate = "", deliveryPrice = -1, deliveryStatus = "", payment = "");
+	}
 
 	public OrderEntity(Integer orderId,  String companyName, String customerName,String deliveryDate, Integer deliveryPrice,
 			 String deliveryStatus, String payment) {

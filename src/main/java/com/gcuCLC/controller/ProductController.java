@@ -1,6 +1,8 @@
 package com.gcuCLC.controller;
 
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +46,12 @@ public class ProductController {
 	
 	public static OrderEntity orderEnt;
 	
+	/**
+	 * 
+	 * @param model
+	 * @param user
+	 * @return
+	 */
 	@GetMapping("/")
     public String displayProducts(Model model, User user) {
 		
@@ -55,7 +63,13 @@ public class ProductController {
 	
 	
 	
-	
+	/**
+	 * 
+	 * @param productClone
+	 * @param bindingResult
+	 * @param model
+	 * @return
+	 */
 	@PostMapping("/doProductClone")
 	public String ProductPage(@ModelAttribute("products") ProductModel productClone, BindingResult bindingResult, Model model) {		
 			
@@ -70,6 +84,13 @@ public class ProductController {
 		return "products";
 	}
 	
+	/**
+	 * 
+	 * @param login
+	 * @param model
+	 * @param bindingResult
+	 * @return
+	 */
 	// View Orders Response
 	@GetMapping("/viewOrders")
 	public String viewOrder(@ModelAttribute Login login, Model model, BindingResult bindingResult)
@@ -87,6 +108,12 @@ public class ProductController {
 	
 	public static Login login = new Login();
 	
+	/**
+	 * 
+	 * @param login
+	 * @param model
+	 * @return
+	 */
 	@SuppressWarnings("static-access")
 	@GetMapping("/display")
 	public String loginUser(/*@Valid*/@ModelAttribute Login login, Model model) {		
@@ -105,6 +132,16 @@ public class ProductController {
 
 	
 	@GetMapping("/editOrder/{orderId}")
+	/**
+	 * 
+	 * @param orderId
+	 * @param id
+	 * @param form
+	 * @param session
+	 * @param model
+	 * @param login
+	 * @return
+	 */
 	public String displayFoundId (@RequestParam(required = false) Integer orderId, Integer id, @ModelAttribute("form") OrderEntity form, HttpSession session, Model model, Login login ) {
 		
 		if (form.getOrderId() > 0) {
@@ -122,6 +159,16 @@ public class ProductController {
 	}
 	
 	//Mapping for Order Deletion
+	/**
+	 * 
+	 * @param orderId
+	 * @param id
+	 * @param form
+	 * @param session
+	 * @param model
+	 * @param login
+	 * @return
+	 */
 		@GetMapping("/removeOrder/{orderId}")
 		public String deleteSingle(@RequestParam(required = false) Integer orderId, Integer id, @ModelAttribute("form") OrderEntity form, HttpSession session, Model model, Login login ) {
 			
@@ -140,6 +187,15 @@ public class ProductController {
 		}
 		
 	// Update Orders Response
+		/**
+		 * 
+		 * @param login
+		 * @param orderEntity
+		 * @param model
+		 * @param bindingResult
+		 * @param orders
+		 * @return
+		 */
 	@PostMapping("/changeOrder")
 	public String updateOrder(@ModelAttribute Login login, OrderEntity orderEntity, Model model, BindingResult bindingResult, Orders orders )
 	{
@@ -164,6 +220,15 @@ public class ProductController {
 	}
 	
 	// Update Orders Response
+	/**
+	 * 
+	 * @param login
+	 * @param orderEntity
+	 * @param model
+	 * @param bindingResult
+	 * @param orders
+	 * @return
+	 */
 		@PostMapping("/removeOrder")
 		public String deleteOrder(@ModelAttribute Login login, OrderEntity orderEntity, Model model, BindingResult bindingResult, Orders orders )
 		{
@@ -188,6 +253,15 @@ public class ProductController {
 		}
 	
 		//Show product viewer
+		/**
+		 * 
+		 * @param login
+		 * @param orderEntity
+		 * @param model
+		 * @param bindingResult
+		 * @param orders
+		 * @return
+		 */
 		@PostMapping("/addOrder")
 		public String addOrder(@ModelAttribute Login login, OrderEntity orderEntity, Model model, BindingResult bindingResult, Orders orders)
 		{
@@ -209,6 +283,87 @@ public class ProductController {
 			model.addAttribute("login", new Login());
 
 			return viewOrder(login, model, bindingResult);
+		}
+		
+		
+		/**
+		 * Used to Search for a Specific Product
+		 * @param login
+		 * @param model
+		 * @param searchTerm
+		 * @return
+		 */
+		@RequestMapping(path = { "/search" })
+		public String search(/* @Valid */@ModelAttribute Login login, Model model, String searchTerm) {
+			System.out.println(searchTerm);
+			ArrayList<ProductModel> tempList = new ArrayList<ProductModel>();
+			if (searchTerm.isEmpty())
+				model.addAttribute("products", service.getProducts());
+			else {
+				try {
+					String[] entry = searchTerm.split(":");
+					switch (entry[0]) {
+						case "id":
+							service.getProducts().forEach((p) -> {
+								if (p.getOrderId() == Integer.parseInt(entry[1]))
+									tempList.add(p);
+							});
+							model.addAttribute("products", tempList);
+							break;
+						case "company":
+							service.getProducts().forEach((p) -> {
+								if (p.getCompanyName().equalsIgnoreCase(entry[1]))
+									tempList.add(p);
+							});
+							model.addAttribute("products", tempList);
+							break;
+						case "customer":
+							service.getProducts().forEach((p) -> {
+								if (p.getCustomerName().equalsIgnoreCase(entry[1]))
+									tempList.add(p);
+							});
+							model.addAttribute("products", tempList);
+							break;
+						case "date":
+							service.getProducts().forEach((p) -> {
+								if (p.getDeliveryDate().equalsIgnoreCase(entry[1]))
+									tempList.add(p);
+							});
+							model.addAttribute("products", tempList);
+							break;
+						case "price":
+							service.getProducts().forEach((p) -> {
+								if (p.getDeliveryPrice() == Integer.parseInt(entry[1]))
+									tempList.add(p);
+							});
+							model.addAttribute("products", tempList);
+							break;
+						case "status":
+							service.getProducts().forEach((p) -> {
+								if (p.getDeliveryStatus().equalsIgnoreCase(entry[1]))
+									tempList.add(p);
+							});
+							model.addAttribute("products", tempList);
+							break;
+						case "payment":
+							service.getProducts().forEach((p) -> {
+								if (p.getPayment().equalsIgnoreCase(entry[1]))
+									tempList.add(p);
+							});
+							model.addAttribute("products", tempList);
+							break;
+						default:
+							model.addAttribute("products", new ArrayList<ProductModel>());
+							break;
+					}
+				} catch (Exception e) {
+					model.addAttribute("products", tempList);
+					model.addAttribute("orderEntity", new OrderEntity());
+					return "viewOrders";
+				}
+			}
+			model.addAttribute("orderEntity", new OrderEntity());
+			return "viewOrders";
 		}
 	
 }

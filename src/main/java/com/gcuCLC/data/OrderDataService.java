@@ -244,6 +244,8 @@ public class OrderDataService implements DataAccessInterface<OrderEntity>{
 		return editRepo.findByOrderId(id);
 	}
 
-
+	public List<OrderEntity> getOrderByCompanyName(String companyName){
+		return editRepo.findByCompanyName(companyName);
+	}
 
 }
