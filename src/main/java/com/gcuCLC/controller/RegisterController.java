@@ -1,14 +1,5 @@
 package com.gcuCLC.controller;
 
-
-
-/** * * * * * * * * * * * * * * *
- * CST-339 CLC Milestone Project
- * Order Management Application *
- * Created by Warren Peterson,* *
- * Jonathan Levan, Ivan Gudino  *
- * * * * * * * * * * * * * * * **/ 
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +18,27 @@ import com.gcuCLC.model.Login;
 //import com.gcuCLC.business.ProductsBusinessInterface;
 import com.gcuCLC.model.User;
 
+/**
+ * ---------------------------------------------------------------------------
+ * Name      : Group H1
+ * Members   : W. Peterson, J. LeVan, and I. Gudino
+ * Date      : 2022-03-11
+ * Class     : CST-339 Java Programming III
+ * Professor : Brandon Bass
+ * Assignment: Milestone - CLC Group Assignment
+ * Disclaimer: This is our own work
+ * ---------------------------------------------------------------------------
+ * Description:
+ * 1. Controller - Registration Controller
+ * ---------------------------------------------------------------------------
+ * Modification History:
+ * Date     Name                Comment
+ * -------- ------------------- ----------------------------------------------
+ * 01/18/2022 Team                Initial Creation
+ *
+ *
+ */
+
 // Register Controller controls Register Page Actions
 @Controller
 @RequestMapping("/register")
@@ -35,7 +47,11 @@ public class RegisterController {
 	@Autowired
 	private UserRepository userRepo;
 	
-    // Show Register form
+	/**
+	 * Displays Registration Page
+	 * @param model - Auto Injected Model
+	 * @return register - Registration Page
+	 */
 	@GetMapping("/")
 	public String showRegistrationForm(Model model) {
 		model.addAttribute("title", "Register Form");
@@ -43,7 +59,17 @@ public class RegisterController {
 		return "register";
 	}
 
-	// Register new user
+	/**
+	 * Handles Post Registration
+	 * @param user - Auto Injected User Model
+	 * @param bindingResult - Auto Injected Binding Result
+	 * @param model - Auto Injected Model
+	 * @param ra - Auto Injected Redirect Attributes
+	 * @param login - Auto Injected Login Model
+	 * @param userEntity - Auto Injected User Entity Entity
+	 * @return register - Register Page if error
+	 * @return login - Login Page if Success
+	 */
 	@PostMapping("/doRegister")
 	public String saveUser(@ModelAttribute@Valid User user, BindingResult bindingResult, Model model, RedirectAttributes ra, Login login, UserEntity userEntity) {		
 		
@@ -68,12 +94,7 @@ public class RegisterController {
 		userEntity.setPassword(userEntity.getPassword());
 		userEntity.setBusinessName(userEntity.getBusinessName());
 		userEntity.setPhone(userEntity.getPhone());
-		
-		//userRepo.save(userEntity);
-		
-		//UserEntity ue = new UserEntity(user);
-		//ue = orderRepo
-		//UserDataService uds = new UserDataService(null, getDataSource());
+
         if(userRepo.findByUsername(userEntity.getUsername()) != null)
         {
 			ra.addFlashAttribute("error", "User with that username already exists");
@@ -86,18 +107,6 @@ public class RegisterController {
 			return "redirect:/login/";
 		}
 	
-		
-		//return "registerSuccess";
 	}
-	
-//	public DataSource getDataSource() {
-//		@SuppressWarnings("rawtypes")
-//		DataSourceBuilder dsb = DataSourceBuilder.create();
-//		dsb.url("jdbc:mysql://localhost:3306/oms");
-//		dsb.username("root");
-//		dsb.password("root");
-//		dsb.driverClassName("com.mysql.cj.jdbc.Driver");
-//		return dsb.build();
-//	}
 	
 }

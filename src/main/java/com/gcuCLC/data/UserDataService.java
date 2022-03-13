@@ -12,6 +12,27 @@ import org.springframework.stereotype.Service;
 import com.gcuCLC.entity.UserEntity;
 import com.gcuCLC.repository.UserRepository;
 
+/**
+ * ---------------------------------------------------------------------------
+ * Name      : Group H1
+ * Members   : W. Peterson, J. LeVan, and I. Gudino
+ * Date      : 2022-03-11
+ * Class     : CST-339 Java Programming III
+ * Professor : Brandon Bass
+ * Assignment: Milestone - CLC Group Assignment
+ * Disclaimer: This is our own work
+ * ---------------------------------------------------------------------------
+ * Description:
+ * 1. Data Service - User Data Service
+ * ---------------------------------------------------------------------------
+ * Modification History:
+ * Date     Name                Comment
+ * -------- ------------------- ----------------------------------------------
+ * 01/18/2022 Team                Initial Creation
+ *
+ *
+ */
+
 @Service
 public class UserDataService implements DataAccessInterface<UserEntity>, DataAccessUserInterface<UserEntity>{
 
@@ -25,6 +46,8 @@ public class UserDataService implements DataAccessInterface<UserEntity>, DataAcc
 	
 	/**
 	 * Non-Default Constructor for constructor injection
+	 * @param usersRepository - Auto Injected Users Repository Repository
+	 * @param dataSource - Auto Injected DataSource
 	 */
 	public UserDataService(UserRepository usersRepository, DataSource dataSource) { // 2/26/2022 comment out
 		this.usersRepository = usersRepository;
@@ -56,6 +79,9 @@ public class UserDataService implements DataAccessInterface<UserEntity>, DataAcc
 		return user;
 	}
 
+	/**
+	 * Method to find User by Id
+	 */
 	@Override
 	public UserEntity findById(Integer id) {
 		// TODO Auto-generated method stub
@@ -128,9 +154,9 @@ public class UserDataService implements DataAccessInterface<UserEntity>, DataAcc
 	}
 
 	/**
-	 * CRUD: Method to Delete an Order Entity
-	 * @param order
-	 * @return
+	 * CRUD: Method to Delete a User
+	 * @param user - Auto Injected User Entity Entity
+	 * @return Deleted User
 	 */
 	@Override
 	public boolean delete(UserEntity user) {
@@ -148,6 +174,9 @@ public class UserDataService implements DataAccessInterface<UserEntity>, DataAcc
 		return true;
 	}
 
+	/**
+	 * Method to Find User by Email
+	 */
 	@SuppressWarnings("deprecation")
 	@Override
 	public UserEntity findByEmail(String email) {
@@ -177,75 +206,23 @@ public class UserDataService implements DataAccessInterface<UserEntity>, DataAcc
 			return (UserEntity) users;
 		}
 	}
-
-//	@SuppressWarnings("deprecation")
-//	@Override
-//	public UserEntity findByUsername(String username) {
-//		{
-//			String sql = "SELECT * FROM USER WHERE USER_NAME = ?";
-//			UserEntity users =new UserEntity();
-//			try
-//			{
-//				users = jdbcTemplateObject.queryForObject(sql, new Object[]{username}, (rs, rowNum) ->
-//					    new UserEntity((long) rs.getInt("USER_ID"),
-//									  rs.getString("USER_NAME"),
-//									  rs.getString("FIRST_NAME"),
-//									  rs.getString("LAST_NAME"),
-//									  rs.getString("ADDRESS"),
-//									  rs.getString("CITY"),
-//									  rs.getString("STATE"),
-//									  rs.getString("ZIP"),
-//									  rs.getString("EMAIL"),
-//									  rs.getString("PASSWORD"),
-//									  rs.getString("BUSINESS_NAME"),
-//									  rs.getString("PHONE")));		
-//			}
-//			catch (Exception e)
-//			{
-//				e.printStackTrace();
-//			}
-//			return (UserEntity) users;
-//		}
-//	}
 	
 	/**
 	 * CRUD: finder to return an entity by User name
-	 * @param username
-	 * @return
+	 * @param username - String
+	 * @return User Based on Username
 	 */
 	public UserEntity findByUsername(String username)
 	{
 		return usersRepository.findByUsername(username);
 	}
-
-//	@SuppressWarnings("deprecation")
-//	@Override
-//	public Boolean verifyUser(String username, String password)
-//	{
-//		int results = 0;
-//		
-//		String sql = "SELECT COUNT(*) FROM USER WHERE USER_NAME = ? AND PASSWORD = ?";
-//		try
-//		{
-//			results = jdbcTemplateObject.queryForObject(sql, new Object[]{username, password}, Integer.class);
-//		}
-//		catch (Exception e)
-//		{
-//			e.printStackTrace();
-//		}
-//
-//		if (results == 0)
-//		{
-//			System.out.printf("User does not have an account: Username=%s, Password=%s\n", username, password);
-//			return false;
-//		}
-//		else
-//		{
-//			System.out.printf("User has a valid account: Username=%s, Password=%s\n", username, password);
-//			return true;			
-//		}
-//	}
 	
+	/**
+	 * Method to Check if User Name Already Exists in Database
+	 * @param username - String
+	 * @return true if user is valid
+	 * @return false if user already exists
+	 */
 	@SuppressWarnings("deprecation")
 	public Boolean usernameExists(String username)
 	{
@@ -273,11 +250,17 @@ public class UserDataService implements DataAccessInterface<UserEntity>, DataAcc
 		}
 	}
 
+	/**
+	 * Tells Console when service is initialized
+	 */
 	@Override
 	public void init() {
 		System.out.println("UserDataService Initialized");
 	}
 
+	/**
+	 * Tells Console when service is destroyed
+	 */
 	@Override
 	public void destroy() {
 		System.out.println("UserDataService Destroyed");	

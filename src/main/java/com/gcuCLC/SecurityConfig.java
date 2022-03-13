@@ -8,15 +8,29 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.gcuCLC.business.UserBusinessService;
-import com.gcuCLC.model.gcuCLCuserDetails;
+
 /**
- * This is Warren's Side branch
- * @author warre
+ * ---------------------------------------------------------------------------
+ * Name      : Group H1
+ * Members   : W. Peterson, J. LeVan, and I. Gudino
+ * Date      : 2022-03-11
+ * Class     : CST-339 Java Programming III
+ * Professor : Brandon Bass
+ * Assignment: Milestone - CLC Group Assignment
+ * Disclaimer: This is our own work
+ * ---------------------------------------------------------------------------
+ * Description:
+ * 1. Main Application - Security Configuration
+ * ---------------------------------------------------------------------------
+ * Modification History:
+ * Date     Name                Comment
+ * -------- ------------------- ----------------------------------------------
+ * 02/18/2022 Team                Initial Creation
+ *
  *
  */
 
@@ -30,17 +44,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	UserBusinessService service;
 	
+	/**
+	 * Enables Password Encryption
+	 * @return BCryptPasswordEncoder
+	 */
 	@Bean
 	BCryptPasswordEncoder passwordEncoder()
 	{
 		return new BCryptPasswordEncoder();
 	}
 	
-//	@Bean
-//	public UserDetailsService userDetailsService() {
-//		return new gcuCLCuserDetails();
-//	}
-	
+	/**
+	 * Allows Program pass details other than userName And password
+	 * to the rest of the program. Works with the gcuCLCuserDetails
+	 * class
+	 * @return authProvider - Uses DaoAuthenticationProvider
+	 */
 	public DaoAuthenticationProvider authenticationProvider() {
 		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
 		authProvider.setUserDetailsService(userDetailsService());
@@ -48,6 +67,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return authProvider;
 	}
 	
+	/**
+	 * Security Configuration - Defining security layout
+	 * @param http - Auto Injected HttpSecurity
+	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception
 	{
@@ -77,6 +100,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				
 	}
 	
+	/**
+	 * Security Configuration - Define encoding
+	 * @param auth - Auto Injected AuthenticationManagerBuilder
+	 */
 	@Autowired
 	public void configure(AuthenticationManagerBuilder auth) throws Exception
 	{
@@ -85,11 +112,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.passwordEncoder(passwordEncoder);
 	}
 	
-	// For 6.1 In-Memory Authorization
-//	@Autowired
-//	public void configure(AuthenticationManagerBuilder auth) throws Exception
-//	{
-//		auth.inMemoryAuthentication()
-//			.withUser("WarrenGSlice").password("{noop}Dreamteam").roles("USER"); // <--- Is the role correct?
-//	}
 }

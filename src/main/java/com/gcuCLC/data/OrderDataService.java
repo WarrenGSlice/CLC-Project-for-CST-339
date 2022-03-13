@@ -12,6 +12,27 @@ import com.gcuCLC.entity.OrderEntity;
 import com.gcuCLC.repository.EditOrderRepository;
 import com.gcuCLC.repository.OrdersRepository;
 
+/**
+ * ---------------------------------------------------------------------------
+ * Name      : Group H1
+ * Members   : W. Peterson, J. LeVan, and I. Gudino
+ * Date      : 2022-03-11
+ * Class     : CST-339 Java Programming III
+ * Professor : Brandon Bass
+ * Assignment: Milestone - CLC Group Assignment
+ * Disclaimer: This is our own work
+ * ---------------------------------------------------------------------------
+ * Description:
+ * 1. Service - Order Data Service
+ * ---------------------------------------------------------------------------
+ * Modification History:
+ * Date     Name                Comment
+ * -------- ------------------- ----------------------------------------------
+ * 01/18/2022 Team                Initial Creation
+ *
+ *
+ */
+
 @Service
 public class OrderDataService implements DataAccessInterface<OrderEntity>{
 
@@ -26,6 +47,8 @@ public class OrderDataService implements DataAccessInterface<OrderEntity>{
 	
 	/**
 	 * Non-Default Constructor for constructor injection
+	 * @param ordersRepository - Auto Injected Orders Repository Repository
+	 * @param dataSource - Auto Injected Data Source
 	 */
 	public OrderDataService(OrdersRepository ordersRepository, DataSource dataSource) {
 		this.ordersRepository = ordersRepository;
@@ -33,6 +56,9 @@ public class OrderDataService implements DataAccessInterface<OrderEntity>{
 		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
 	}
 	
+	/**
+	 * Default No Args Constructor
+	 */
 	public OrderDataService() {
 		// TODO Auto-generated constructor stub
 	}
@@ -63,6 +89,11 @@ public class OrderDataService implements DataAccessInterface<OrderEntity>{
 		return orders;
 	}
 	
+	/**
+	 * CRUD: Method to Find Orders By Order Id
+	 * @param orderId - Auto Injected Iterable of Type Long
+	 * @return orders - Returns Full Order
+	 */
 	public List<OrderEntity> findByOrderId(Iterable<Long> orderId){
 		List<OrderEntity> orders = new ArrayList<OrderEntity>();
 		try
@@ -78,6 +109,11 @@ public class OrderDataService implements DataAccessInterface<OrderEntity>{
 		return orders;
 	}
 
+	/**
+	 * Method to Find Orders By Id - Might not be used
+	 * @param id - Integer
+	 * @return orders - find By Order Id
+	 */
 	@SuppressWarnings("deprecation")
 	@Override
 	public OrderEntity findById(Integer id) {
@@ -102,6 +138,11 @@ public class OrderDataService implements DataAccessInterface<OrderEntity>{
 		return (OrderEntity) orders;
 	}
 	
+	/**
+	 * Method find order by Priority Key
+	 * @param orderId - Integer
+	 * @return Order in Database
+	 */
 	@SuppressWarnings("deprecation")
 	public OrderEntity findByPk(Integer orderId) {
 		OrderEntity ordEnt = null;
@@ -139,8 +180,12 @@ public class OrderDataService implements DataAccessInterface<OrderEntity>{
 		return ordEnt;
 	}
 	
-
-	
+	/**
+	 * Method to Verify an Order
+	 * @param id - Integer
+	 * @return true - If Order Exists
+	 * @return false - If Not
+	 */
 	@SuppressWarnings("deprecation")
 	public Boolean verifyOrder(Integer id) {
 		int results = 0;
@@ -162,6 +207,7 @@ public class OrderDataService implements DataAccessInterface<OrderEntity>{
 
 	/**
 	 * CRUD: create an entity
+	 * Used in Assignment, but not application
 	 */
 	@Override
 	public boolean create(OrderEntity orders) {
@@ -188,6 +234,10 @@ public class OrderDataService implements DataAccessInterface<OrderEntity>{
 	return true;
 	}
 	
+	/**
+	 * Method that was used to Order Id
+	 * @return New Order Id
+	 */
 	public String getOrderNo() {
         String sql = "select max(order_id) from orders";
         String orderId = jdbcTemplateObject.queryForObject(sql, String.class);
@@ -207,13 +257,13 @@ public class OrderDataService implements DataAccessInterface<OrderEntity>{
 	@Override
 	public boolean update(OrderEntity order) {
 		
-		
 		// Return the List
 		return ordersRepository.save(order) != null;
 	}
 
-	
-	
+	/**
+	 * CRUD: Method to Delete an Order Entity
+	 */
 	@Override 
 	public boolean delete(OrderEntity t) {
 		try
@@ -230,20 +280,36 @@ public class OrderDataService implements DataAccessInterface<OrderEntity>{
 		return true;
 	}
 
+	/**
+	 * Method to tell Console when service is initialized
+	 */
 	@Override
 	public void init() {
 		System.out.println("OrderDataService Initialized");
 	}
 
+	/**
+	 * Method to tell Console when service is destroyed
+	 */
 	@Override
 	public void destroy() {
 		System.out.println("OrderDataService Destroyed");	
 	}
 	
+	/**
+	 * CRUD: Method to Find Order in Database by Order Id
+	 * @param id - Order Id
+	 * @return - Order in Database
+	 */
 	public List<OrderEntity> getOrderByOrderId(Integer id){
 		return editRepo.findByOrderId(id);
 	}
 
+	/**
+	 * CRUD: Method to Find Order in Database by Company Name
+	 * @param companyName - Company Name
+	 * @return Order in Database
+	 */
 	public List<OrderEntity> getOrderByCompanyName(String companyName){
 		return editRepo.findByCompanyName(companyName);
 	}

@@ -3,16 +3,33 @@ package com.gcuCLC.data;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-
-import com.gcuCLC.entity.OrderEntity;
 import com.gcuCLC.entity.ProductImageEntity;
 import com.gcuCLC.entity.ProductsEntity;
 import com.gcuCLC.repository.ProductImageRepository;
+
+/**
+ * ---------------------------------------------------------------------------
+ * Name      : Group H1
+ * Members   : W. Peterson, J. LeVan, and I. Gudino
+ * Date      : 2022-03-11
+ * Class     : CST-339 Java Programming III
+ * Professor : Brandon Bass
+ * Assignment: Milestone - CLC Group Assignment
+ * Disclaimer: This is our own work
+ * ---------------------------------------------------------------------------
+ * Description:
+ * 1. Data Service - Product Image Data Service
+ * ---------------------------------------------------------------------------
+ * Modification History:
+ * Date     Name                Comment
+ * -------- ------------------- ----------------------------------------------
+ * 01/18/2022 Team                Initial Creation
+ *
+ *
+ */
 
 public class ProductImageDataService implements DataAccessInterface<ProductImageEntity>, DataAccessProductImageInterface<ProductImageEntity>{
 
@@ -28,7 +45,9 @@ public class ProductImageDataService implements DataAccessInterface<ProductImage
 	private JdbcTemplate jdbcTemplateObject;
 	
 	/**
-	 * Non-Default Constructor for constructor injection
+	 * Non-Default Constructor for constructor Injection
+	 * @param productImageRepository - Auto Injected Product Image Repository Repository
+	 * @param dataSource - Auto Injected Data Source
 	 */
 	public ProductImageDataService(ProductImageRepository productImageRepository, DataSource dataSource) {
 		this.dataSource = dataSource;
@@ -60,6 +79,9 @@ public class ProductImageDataService implements DataAccessInterface<ProductImage
 		return productPhoto;
 	}
 
+	/**
+	 * Method to Find Product Image by Id
+	 */
 	@Override
 	public ProductImageEntity findById(Integer id) {
 		// TODO Auto-generated method stub
@@ -91,7 +113,7 @@ public class ProductImageDataService implements DataAccessInterface<ProductImage
 	}
 
 	/**
-	 * CRUD: Method to Update an Order Entity
+	 * CRUD: Method to Update a Product Image
 	 */
 	@Override
 	public boolean update(ProductImageEntity productPhoto) {
@@ -103,8 +125,8 @@ public class ProductImageDataService implements DataAccessInterface<ProductImage
 
 	/**
 	 * CRUD: Method to Delete an Order Entity
-	 * @param order
-	 * @return
+	 * @param productPhoto - Auto Injected Product Image Entity Entity
+	 * @return - Deleted Image
 	 */
 	@Override
 	public boolean delete(ProductImageEntity productPhoto) {
@@ -122,17 +144,26 @@ public class ProductImageDataService implements DataAccessInterface<ProductImage
 		return true;
 	}
 
+	/**
+	 * Method to Find The Product Image By the Product Id
+	 */
 	@Override
 	public Optional<ProductImageEntity> findProductImagesByProductId(ProductsEntity id) {
 		Integer photoId = id.getProductId();
 		return Optional.of(ProductImageDAO.findById(photoId));
 	}
 	
+	/**
+	 * Method to tell Console When Service is initialized
+	 */
 	@Override
 	public void init() {
 		System.out.println("ProductImageDataService Initialized");
 	}
 
+	/**
+	 * Method to tell Console when Service is destroyed
+	 */
 	@Override
 	public void destroy() {
 		System.out.println("ProductImageDataService Destroyed");	

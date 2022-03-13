@@ -2,9 +2,7 @@ package com.gcuCLC.controller;
 
 
 import java.util.ArrayList;
-
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import com.gcuCLC.business.ProductsBusinessInterface;
 import com.gcuCLC.entity.OrderEntity;
 import com.gcuCLC.entity.Orders;
@@ -23,34 +20,44 @@ import com.gcuCLC.model.ProductModel;
 import com.gcuCLC.model.User;
 import com.gcuCLC.repository.OrdersRepository;
 
-
+/**
+ * ---------------------------------------------------------------------------
+ * Name      : Group H1
+ * Members   : W. Peterson, J. LeVan, and I. Gudino
+ * Date      : 2022-03-11
+ * Class     : CST-339 Java Programming III
+ * Professor : Brandon Bass
+ * Assignment: Milestone - CLC Group Assignment
+ * Disclaimer: This is our own work
+ * ---------------------------------------------------------------------------
+ * Description:
+ * 1. Controller - Product Controller
+ * ---------------------------------------------------------------------------
+ * Modification History:
+ * Date     Name                Comment
+ * -------- ------------------- ----------------------------------------------
+ * 01/18/2022 Team                Initial Creation
+ *
+ *
+ */
 
 @Controller
 @RequestMapping("/productClone")
 public class ProductController {
 	
-	
-//	@Autowired
-//	private EditOrderRepository editRepo;
-	
 	@Autowired
 	private ProductsBusinessInterface service;
-	
-//	@Autowired
-//	private OrderDataService ods;
 	
 	@Autowired
 	private OrdersRepository orderRepo;
 
-	
-	
 	public static OrderEntity orderEnt;
 	
 	/**
-	 * 
-	 * @param model
-	 * @param user
-	 * @return
+	 * Displays the Orders Page
+	 * @param model - Auto Injected Model
+	 * @param user - Auto Injected User
+	 * @return productClone - Application Dashboard
 	 */
 	@GetMapping("/")
     public String displayProducts(Model model, User user) {
@@ -64,11 +71,11 @@ public class ProductController {
 	
 	
 	/**
-	 * 
-	 * @param productClone
-	 * @param bindingResult
-	 * @param model
-	 * @return
+	 * Handles the Response of viewing Orders
+	 * @param productClone - Injection of Product Model
+	 * @param bindingResult - Injection of Binding Result
+	 * @param model - Injection of Model
+	 * @return products - View Products Page
 	 */
 	@PostMapping("/doProductClone")
 	public String ProductPage(@ModelAttribute("products") ProductModel productClone, BindingResult bindingResult, Model model) {		
@@ -85,23 +92,20 @@ public class ProductController {
 	}
 	
 	/**
-	 * 
-	 * @param login
-	 * @param model
-	 * @param bindingResult
-	 * @return
+	 * Displays the Dashboard
+	 * @param login - Injection of Login
+	 * @param model - Injection of Model
+	 * @param bindingResult - Injection of BindingResult
+	 * @return - viewOrders - View Orders Page
 	 */
 	// View Orders Response
 	@GetMapping("/viewOrders")
 	public String viewOrder(@ModelAttribute Login login, Model model, BindingResult bindingResult)
-	{
-		//System.out.println("/viewOrder Order ID: " + orderEntity.getOrderId() + " " + orderEntity.toString());
-		
+	{		
 		model.addAttribute("title" , "View All Orders");
 		model.addAttribute("orderEntity", new OrderEntity());
 		model.addAttribute("products" , service.getProducts());
 		model.addAttribute("login", new Login());
-		//model.addAttribute("viewOrders", orderEntity);
 		
 		return "viewOrders";
 	}
@@ -109,16 +113,15 @@ public class ProductController {
 	public static Login login = new Login();
 	
 	/**
-	 * 
-	 * @param login
-	 * @param model
-	 * @return
+	 * Displays the Display page
+	 * @param login - Injection of Login Model
+	 * @param model - Injection of Model
+	 * @return viewOrders - View Orders Page
 	 */
 	@SuppressWarnings("static-access")
 	@GetMapping("/display")
-	public String loginUser(/*@Valid*/@ModelAttribute Login login, Model model) {		
+	public String loginUser(@ModelAttribute Login login, Model model) {		
 		
-		//service.getProducts();
 		this.login  = login;
 		
 		// Display something
@@ -131,17 +134,17 @@ public class ProductController {
 	}
 
 	
-	@GetMapping("/editOrder/{orderId}")
 	/**
-	 * 
-	 * @param orderId
-	 * @param id
-	 * @param form
-	 * @param session
-	 * @param model
-	 * @param login
-	 * @return
+	 * Shows the Edit Order Page Based on Order Id Selected
+	 * @param orderId - Injection of Integer
+	 * @param id - Injection of Integer
+	 * @param form - Injection of Order Entity Entity
+	 * @param session - Injection of HttpSession Attribute
+	 * @param model - Injection of Model
+	 * @param login - Injection of Login Model
+	 * @return editOrder - Edit Order Page based on Order Id
 	 */
+	@GetMapping("/editOrder/{orderId}")
 	public String displayFoundId (@RequestParam(required = false) Integer orderId, Integer id, @ModelAttribute("form") OrderEntity form, HttpSession session, Model model, Login login ) {
 		
 		if (form.getOrderId() > 0) {
@@ -158,54 +161,52 @@ public class ProductController {
 		return "editOrder";
 	}
 	
-	//Mapping for Order Deletion
 	/**
-	 * 
-	 * @param orderId
-	 * @param id
-	 * @param form
-	 * @param session
-	 * @param model
-	 * @param login
-	 * @return
+	 * Creates Mapping for Order Deletion
+	 * @param orderId - Injection of Integer
+	 * @param id - Injection of Integer
+	 * @param form - Injection of Order Entity Entity
+	 * @param session - Injection of HttpSession Attribute
+	 * @param model - Injection of Model
+	 * @param login - Injection of Login Model
+	 * @return removeOrder - Shows Remove Order Page for Order with the Id of orderId
 	 */
-		@GetMapping("/removeOrder/{orderId}")
-		public String deleteSingle(@RequestParam(required = false) Integer orderId, Integer id, @ModelAttribute("form") OrderEntity form, HttpSession session, Model model, Login login ) {
+	@GetMapping("/removeOrder/{orderId}")
+	public String deleteSingle(@RequestParam(required = false) Integer orderId, Integer id, @ModelAttribute("form") OrderEntity form, HttpSession session, Model model, Login login ) {
 			
-			if (form.getOrderId() > 0) {
-			}
-			OrderEntity ue;
-			ue = orderRepo.findByOrderId(form.getOrderId());
-			ProductController.orderEnt = new OrderEntity(ue);
-
-			System.out.println("/removeOrder Order ID: " + form.getOrderId() + " " + "Company Name: " + form.getCompanyName() + " " +form.toString() );
-			model.addAttribute("orderEntity", form);
-			model.addAttribute("orderEntity", ProductController.orderEnt);
-			model.addAttribute("login", new Login());
-			
-			return "removeOrder";
+		if (form.getOrderId() > 0) {
 		}
+		OrderEntity ue;
+		ue = orderRepo.findByOrderId(form.getOrderId());
+		ProductController.orderEnt = new OrderEntity(ue);
 		
-	// Update Orders Response
-		/**
-		 * 
-		 * @param login
-		 * @param orderEntity
-		 * @param model
-		 * @param bindingResult
-		 * @param orders
-		 * @return
-		 */
+		System.out.println("/removeOrder Order ID: " + form.getOrderId() + " " + "Company Name: " + form.getCompanyName() + " " +form.toString() );
+		model.addAttribute("orderEntity", form);
+		model.addAttribute("orderEntity", ProductController.orderEnt);
+		model.addAttribute("login", new Login());
+			
+		return "removeOrder";
+	}
+		
+	/**
+	 * Update Order Page Based on OrderId
+	 * @param login - Auto Injection of Login Model
+	 * @param orderEntity - Auto Injection of Order Entity Entity
+	 * @param model - Auto Injection of Model
+	 * @param bindingResult - Auto Injection of Binding Result
+	 * @param orders - Auto Injection of Orders Entity
+	 * @return viewOrder - Takes User back to the Dashboard
+	 */
 	@PostMapping("/changeOrder")
 	public String updateOrder(@ModelAttribute Login login, OrderEntity orderEntity, Model model, BindingResult bindingResult, Orders orders )
 	{
-			orderEntity.setOrderId(orderEntity.getOrderId());
-			orderEntity.setCompanyName(orderEntity.getCompanyName());
-			orderEntity.setCustomerName(orderEntity.getCustomerName());
-			orderEntity.setDeliveryDate(orderEntity.getDeliveryDate());
-			orderEntity.setDeliveryPrice(orderEntity.getDeliveryPrice());
-			orderEntity.setDeliveryStatus(orderEntity.getDeliveryStatus());
-			orderEntity.setPayment(orderEntity.getPayment());
+		orderEntity.setOrderId(orderEntity.getOrderId());
+		orderEntity.setCompanyName(orderEntity.getCompanyName());
+		orderEntity.setCustomerName(orderEntity.getCustomerName());
+		orderEntity.setDeliveryDate(orderEntity.getDeliveryDate());
+		orderEntity.setDeliveryPrice(orderEntity.getDeliveryPrice());
+		orderEntity.setDeliveryStatus(orderEntity.getDeliveryStatus());
+		orderEntity.setPayment(orderEntity.getPayment());
 		
 		orderRepo.save(orderEntity);
 		
@@ -219,26 +220,25 @@ public class ProductController {
 		return viewOrder(login, model, bindingResult); //changed from "viewOrders"
 	}
 	
-	// Update Orders Response
 	/**
-	 * 
-	 * @param login
-	 * @param orderEntity
-	 * @param model
-	 * @param bindingResult
-	 * @param orders
-	 * @return
+	 * Handles Update Order Response Based on Order Id
+	 * @param login - Auto Injection of Login Model
+	 * @param orderEntity - Auto Injection of Order Entity Entity
+	 * @param model - Auto Injection of Model
+	 * @param bindingResult - Auto Injection of Binding Result
+	 * @param orders - Auto Injection of Orders Entity
+	 * @return viewOrders - Dashboard after Update Occurs
 	 */
 		@PostMapping("/removeOrder")
 		public String deleteOrder(@ModelAttribute Login login, OrderEntity orderEntity, Model model, BindingResult bindingResult, Orders orders )
 		{
-				orderEntity.setOrderId(orderEntity.getOrderId());
-				orderEntity.setCompanyName(orderEntity.getCompanyName());
-				orderEntity.setCustomerName(orderEntity.getCustomerName());
-				orderEntity.setDeliveryDate(orderEntity.getDeliveryDate());
-				orderEntity.setDeliveryPrice(orderEntity.getDeliveryPrice());
-				orderEntity.setDeliveryStatus(orderEntity.getDeliveryStatus());
-				orderEntity.setPayment(orderEntity.getPayment());
+			orderEntity.setOrderId(orderEntity.getOrderId());
+			orderEntity.setCompanyName(orderEntity.getCompanyName());
+			orderEntity.setCustomerName(orderEntity.getCustomerName());
+			orderEntity.setDeliveryDate(orderEntity.getDeliveryDate());
+			orderEntity.setDeliveryPrice(orderEntity.getDeliveryPrice());
+			orderEntity.setDeliveryStatus(orderEntity.getDeliveryStatus());
+			orderEntity.setPayment(orderEntity.getPayment());
 			
 			orderRepo.delete(orderEntity);
 			
@@ -252,16 +252,15 @@ public class ProductController {
 			return viewOrder(login, model, bindingResult); //changed from "viewOrders"
 		}
 	
-		//Show product viewer
 		/**
-		 * 
-		 * @param login
-		 * @param orderEntity
-		 * @param model
-		 * @param bindingResult
-		 * @param orders
-		 * @return
-		 */
+		* Handles Add Order Response
+		* @param login - Auto Injection of Login Model
+		* @param orderEntity - Auto Injection of Order Entity Entity
+		* @param model - Auto Injection of Model
+		* @param bindingResult - Auto Injection of Binding Result
+		* @param orders - Auto Injection of Orders Entity
+		* @return viewOrder - Dashboard after Adding Desired Order
+		*/
 		@PostMapping("/addOrder")
 		public String addOrder(@ModelAttribute Login login, OrderEntity orderEntity, Model model, BindingResult bindingResult, Orders orders)
 		{
@@ -285,16 +284,15 @@ public class ProductController {
 			return viewOrder(login, model, bindingResult);
 		}
 		
-		
 		/**
-		 * Used to Search for a Specific Product
-		 * @param login
-		 * @param model
-		 * @param searchTerm
-		 * @return
+		 * Used to Search for a Specific Product (Search Bar)
+		 * @param login - Auto Injection of Login Model
+		 * @param model - Auto Injection of Model
+		 * @param searchTerm - Auto Injection of String type
+		 * @return viewOrders - Dashboard with orders being searched for
 		 */
 		@RequestMapping(path = { "/search" })
-		public String search(/* @Valid */@ModelAttribute Login login, Model model, String searchTerm) {
+		public String search(@ModelAttribute Login login, Model model, String searchTerm) {
 			System.out.println(searchTerm);
 			ArrayList<ProductModel> tempList = new ArrayList<ProductModel>();
 			if (searchTerm.isEmpty())

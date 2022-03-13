@@ -11,6 +11,26 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import com.gcuCLC.entity.ProductsEntity;
 import com.gcuCLC.repository.ProductsRepository;
 
+/**
+ * ---------------------------------------------------------------------------
+ * Name      : Group H1
+ * Members   : W. Peterson, J. LeVan, and I. Gudino
+ * Date      : 2022-03-11
+ * Class     : CST-339 Java Programming III
+ * Professor : Brandon Bass
+ * Assignment: Milestone - CLC Group Assignment
+ * Disclaimer: This is our own work
+ * ---------------------------------------------------------------------------
+ * Description:
+ * 1. Data Service - Product Data Service
+ * ---------------------------------------------------------------------------
+ * Modification History:
+ * Date     Name                Comment
+ * -------- ------------------- ----------------------------------------------
+ * 01/18/2022 Team                Initial Creation
+ *
+ *
+ */
 
 public class ProductDataService implements DataAccessInterface<ProductsEntity> {
 
@@ -24,6 +44,8 @@ public class ProductDataService implements DataAccessInterface<ProductsEntity> {
 	
 	/**
 	 * Non-Default Constructor for constructor injection
+	 * @param productsRepository - Auto Injected Products Repository Repository
+	 * @param dataSource - Auto Injected Data Source
 	 */
 	public ProductDataService(ProductsRepository productsRepository, DataSource dataSource) {
 		this.productsRepository = productsRepository;
@@ -54,6 +76,9 @@ public class ProductDataService implements DataAccessInterface<ProductsEntity> {
 		return products;
 	}
 
+	/**
+	 * Method to find Products by Id
+	 */
 	@Override
 	public ProductsEntity findById(Integer id) {
 		// TODO Auto-generated method stub
@@ -116,38 +141,20 @@ public class ProductDataService implements DataAccessInterface<ProductsEntity> {
 		return true;
 	}
 
+	/**
+	 * Method to tell Console when Service is initialized
+	 */
 	@Override
 	public void init() {
 		System.out.println("ProductDataService Initialized");
 	}
 
+	/**
+	 * Method to tell Console when service is Destroyed
+	 */
 	@Override
 	public void destroy() {
 		System.out.println("ProductDataService Destroyed");	
 	}
 
-	
-//	public void insert(OrderEntity orderEntity)
-//	{
-//		String sql = "INSERT INTO ORDERS " + "(CUSTOMER_NAME, ORDER, DELIVERY_DATE, DELIVERY_PRICE, PAYMENT, DELIVERY_STATUS) VALUES (?, ?, ?, ?, ?, ?)";
-//		KeyHolder holder = new GeneratedKeyHolder();
-//		jdbcTemplateObject.update(new PreparedStatementCreator())
-//		{
-//			@Override
-//			public PreparedStatement createdPreparedStatement(Connection connection) throws SQLException
-//			{
-//				PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-//				ps.setString(1, orderEntity.getCustomerName());
-//				ps.setString(2, orderEntity.getOrder());
-//				ps.setString(3, orderEntity.getDeliveryDate());
-//				ps.setFloat(4, orderEntity.getDeliveryPrice());
-//				ps.setString(5, orderEntity.getPayment());
-//				ps.setString(6, orderEntity.getDeliveryStatus());
-//				return ps;
-//			}
-//		}, holder);
-//
-//		int generatedOrderId = holder.getKey().intValue();
-//		System.out.println("generatedOrderId = " + generatedOrderId);
-//	}
 }

@@ -15,6 +15,27 @@ import com.gcuCLC.entity.UserPhotoEntity;
 import com.gcuCLC.repository.UserPhotoRepository;
 import com.gcuCLC.repository.UserRepository;
 
+/**
+ * ---------------------------------------------------------------------------
+ * Name      : Group H1
+ * Members   : W. Peterson, J. LeVan, and I. Gudino
+ * Date      : 2022-03-11
+ * Class     : CST-339 Java Programming III
+ * Professor : Brandon Bass
+ * Assignment: Milestone - CLC Group Assignment
+ * Disclaimer: This is our own work
+ * ---------------------------------------------------------------------------
+ * Description:
+ * 1. Data Service - User Photo Data Service
+ * ---------------------------------------------------------------------------
+ * Modification History:
+ * Date     Name                Comment
+ * -------- ------------------- ----------------------------------------------
+ * 01/18/2022 Team                Initial Creation
+ *
+ *
+ */
+
 @Service
 public class UserPhotoDataService implements DataAccessInterface<UserPhotoEntity>, DataAcessUserImageInterface<UserPhotoEntity>{
 
@@ -34,6 +55,8 @@ public class UserPhotoDataService implements DataAccessInterface<UserPhotoEntity
 	
 	/**
 	 * Non-Default Constructor for constructor injection
+	 * @param usersPhotoRepository - Auto Injected Users Photo Repository Repository
+	 * @param dataSource - Auto Injected Data Source
 	 */
 	public UserPhotoDataService(UserPhotoRepository usersPhotoRepository, DataSource dataSource) {
 		this.usersPhotoRepository = usersPhotoRepository;
@@ -65,6 +88,9 @@ public class UserPhotoDataService implements DataAccessInterface<UserPhotoEntity
 		return userPhoto;
 	}
 
+	/**
+	 * Method to Find User Photo by Photo Id
+	 */
 	@Override
 	public UserPhotoEntity findById(Integer id) {
 		// TODO Auto-generated method stub
@@ -96,20 +122,19 @@ public class UserPhotoDataService implements DataAccessInterface<UserPhotoEntity
 	}
 
 	/**
-	 * CRUD: Method to Update an Order Entity
+	 * CRUD: Method to Update an User Photo
 	 */
 	@Override
 	public boolean update(UserPhotoEntity userPhoto) {
-		
-		
+				
 		// Return the List
 		return usersPhotoRepository.save(userPhoto) != null;
 	}
 
 	/**
-	 * CRUD: Method to Delete an Order Entity
-	 * @param order
-	 * @return
+	 * CRUD: Method to Delete a User Photo
+	 * @param userPhoto - Auto Injected User Photo Entity Entity
+	 * @return - Deleted User Photo
 	 */
 	@Override
 	public boolean delete(UserPhotoEntity userPhoto) {
@@ -127,6 +152,9 @@ public class UserPhotoDataService implements DataAccessInterface<UserPhotoEntity
 		return true;
 	}
 
+	/**
+	 * Method to Find User Photo By User Id
+	 */
 	@Override
 	public Optional<UserPhotoEntity> findUserPhotosByUserId(UserEntity id) {
 		
@@ -134,11 +162,17 @@ public class UserPhotoDataService implements DataAccessInterface<UserPhotoEntity
 		return Optional.of(UserPhotoDAO.findById((int) photoId));
 	}
 	
+	/**
+	 * Tells Console when Service is Initialized
+	 */
 	@Override
 	public void init() {
 		System.out.println("UserPhotoDataService Initialized");
 	}
 
+	/**
+	 * Tells Console when service is destroyed
+	 */
 	@Override
 	public void destroy() {
 		System.out.println("UserPhotoDataService Destroyed");	

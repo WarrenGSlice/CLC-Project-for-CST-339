@@ -2,23 +2,13 @@ package com.gcuCLC.controller;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-
-/** * * * * * * * * * * * * * * *
- * CST-339 CLC Milestone Project
- * Order Management Application *
- * Created by Warren Peterson,* *
- * Jonathan Levan, Ivan Gudino  *
- * * * * * * * * * * * * * * * **/
-
 import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
 import java.util.Random;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,7 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import com.gcuCLC.business.ProductsBusinessInterface;
 import com.gcuCLC.business.UserBusinessService;
 import com.gcuCLC.entity.UserEntity;
@@ -35,6 +24,27 @@ import com.gcuCLC.model.Password;
 import com.gcuCLC.model.User;
 import com.gcuCLC.model.gcuCLCuserDetails;
 import com.gcuCLC.repository.UserRepository;
+
+/**
+ * ---------------------------------------------------------------------------
+ * Name      : Group H1
+ * Members   : W. Peterson, J. LeVan, and I. Gudino
+ * Date      : 2022-03-11
+ * Class     : CST-339 Java Programming III
+ * Professor : Brandon Bass
+ * Assignment: Milestone - CLC Group Assignment
+ * Disclaimer: This is our own work
+ * ---------------------------------------------------------------------------
+ * Description:
+ * 1. Controller - User Controller
+ * ---------------------------------------------------------------------------
+ * Modification History:
+ * Date     Name                Comment
+ * -------- ------------------- ----------------------------------------------
+ * 01/18/2022 Team                Initial Creation
+ *
+ *
+ */
 
 // User Controller controls User Settings Actions
 @Controller
@@ -48,7 +58,8 @@ public class UserController {
 	@Autowired
     private ProductsBusinessInterface bservice;
     
-    @Autowired
+    @SuppressWarnings("unused")
+	@Autowired
     private UserBusinessService userService;
     
     @Autowired
@@ -58,7 +69,14 @@ public class UserController {
     public static User user;
     public int code;
 
-    // Show User Settings form
+    /**
+     * Displays The User Settings Page
+     * @param login - Auto Injected Login Model
+     * @param model - Auto Injected Model
+     * @param userEntity - Auto Injected User Entity Entity
+     * @param loggedUser - Auto Injected gcuCLCuserDetails
+     * @return userSettings - User Settings Page
+     */
     @GetMapping("/")
     public String showUserSettings(Login login, Model model, UserEntity userEntity, @AuthenticationPrincipal gcuCLCuserDetails loggedUser) {
         if (user == null)
@@ -69,30 +87,28 @@ public class UserController {
         String username = loggedUser.getUsername();
         userEntity = userRepo.findByUsername(username);
         UserEntity ue;
-        //UserDataService uds = new UserDataService(null, getDataSource());
         if(userRepo.findByUsernameAndPassword(LoginController.login.getUsername(), LoginController.login.getPassword()) != null)
         {
             ue = userRepo.findByUsername(LoginController.login.getUsername());
             UserController.user = new User(ue);
         }
-//        loggedUser.setFirstName(user.getFirstName());
-//        loggedUser.setLastName(user.getLastName());
-//        loggedUser.setBusinessName(user.getBusinessName());
-//        loggedUser.setAddress(user.getAddress());
-//        loggedUser.setEmail(user.getEmail());
-//        loggedUser.setPhone(user.getPhone());
-//        loggedUser.setCity(user.getCity());
-//        loggedUser.setState(user.getState());
-//        loggedUser.setZip(user.getZip());
-        //UserDetails username = UserBusinessService.loadUserByUsername();
-		//UserDetails username = userService.loadUserByUsername();
+
         model.addAttribute("user", userEntity);
         model.addAttribute("user", UserController.user);
         model.addAttribute("login", LoginController.login);
         return "userSettings";
     }
 
-    // Register new user
+    /**
+     * Handles The saving of user settings
+     * @param user - Auto Injected User Model
+     * @param bindingResult - Auto Injected Binding Result
+     * @param model - Auto Injected Model
+     * @param login - Auto Injected Login Model
+     * @param userEntity - Auto Injected User Entity Entity
+     * @param loggedUser - Auto Injected gcuCLCuserDetails
+     * @return userSettings - User Settings Page
+     */
     @PostMapping("/changeSettings")
     public String saveUser(@ModelAttribute @Valid User user, BindingResult bindingResult, Model model, Login login, UserEntity userEntity,
     						@AuthenticationPrincipal gcuCLCuserDetails loggedUser) {
@@ -119,7 +135,6 @@ public class UserController {
         model.addAttribute("user", UserController.user);
 
         UserEntity ue = new UserEntity(UserController.user);
-        //UserDataService uds = new UserDataService(null, getDataSource());
         if(userRepo.findByUsernameAndPassword(ue.getUsername(), ue.getPassword()) != null)
             userRepo.save(ue);
         else
@@ -128,6 +143,13 @@ public class UserController {
         return "userSettings";
     }
     
+    /**
+     * Handles the Changing Password
+     * @param pass - Auto Injected Password Model
+     * @param bindingResult - Auto Injected Binding Result
+     * @param model - Auto Injected Model
+     * @return userSettings - User Settings Page
+     */
     @PostMapping("/changePassword")
     public String changePassword(@ModelAttribute @Valid Password pass, BindingResult bindingResult, Model model)
     {
@@ -141,6 +163,13 @@ public class UserController {
         return "userSettings";
     }
     
+    /**
+     * Displays the Password Change Page
+     * @param user - Auto Injected User Model
+     * @param bindingResult - Auto Injected Binding Result
+     * @param model - Auto Injected Model
+     * @return userSettings - User Settings Page
+     */
     @GetMapping("/doPassChange")
     public String doPassChange(@ModelAttribute @Valid User user, BindingResult bindingResult, Model model)
     {
@@ -184,6 +213,12 @@ public class UserController {
         }
     }
     
+    /**
+     * Sends Password Reset Code to Email
+     * @param code - Auto Injected int
+     * @throws UnsupportedEncodingException - Unsupported Encoding Exception
+     * @throws MessagingException - Messaging Exception
+     */
     public void sendCode(int code) throws UnsupportedEncodingException, MessagingException
     {
         String toAddress = user.getEmail();
@@ -210,12 +245,4 @@ public class UserController {
         mailSender.send(message);
     }
 
-//    public DataSource getDataSource(){
-//        DataSourceBuilder<?> dsb = DataSourceBuilder.create();
-//        dsb.url("jdbc:mysql://localhost:3306/oms");
-//        dsb.username("root");
-//        dsb.password("root");
-//        dsb.driverClassName("com.mysql.cj.jdbc.Driver");
-//        return dsb.build();
-//    }
 }
